@@ -138,7 +138,7 @@ function popElement(arr) {
 
   return arr; // Pops the last element and returns it
 }
-console.log("popElement:" + popElement([1, 2, 3, 4, 5]));
+// console.log("popElement:" + popElement([1, 2, 3, 4, 5]));
 
 /**
  * 
@@ -154,4 +154,209 @@ and return a string like this:
 
 function animal(obj) {
   return `This ${obj.color} ${obj.name} has ${obj.legs} legs.`;
+}
+
+/**
+ * Task:7
+ * The function giveMeFive accepts 1 parameter, obj, which is an object.
+
+Create an array (which you will eventually return).
+Then, traverse obj, checking each key and value..
+If the length of the key is equal to 5, then push
+the key to your array. Separately, if the length 
+of the value is equal to 5, then push the value
+to your array.
+
+At the end, return your array.
+
+You should use for..in in your code, otherwise your
+solution may not pass this kata.
+ */
+
+function giveMeFive(obj) {
+  //coding here
+  let arr = [];
+  for (let key in obj) {
+    if (key.length === 5) {
+      arr.push(key);
+    }
+    if (obj[key].length === 5) {
+      arr.push(obj[key]);
+    }
+  }
+  return arr;
+}
+// console.log(
+//   "giveMeFive:" +
+//     giveMeFive({
+//       name: "dog",
+//       legs: 5,
+//       color: "white",
+//       age: 5,
+//       breed: "bulldog",
+//       owner: "John",
+//       hobby: "running",
+//       favoriteFood: "meat",
+//     })
+// );
+
+/**
+ * Task:8
+ * Task
+Complete function padIt, which accepts 2 parameters:
+
+str: a string representing the string to pad. We 
+will pad it with "*" symbols on its left side and on 
+its right side.
+n: a number indicating how many times to pad the string.
+Behaviour
+You need to write a loop statement within the function
+ that loops n times. Each time through the loop it will
+  add one * to str, alternating on which side it is padded: 
+  the first time will add a * to the left side of str, the 
+  second time will add a * to the right side, and so on.
+
+Finally, return the padded string.
+ */
+function padIt(str, n) {
+  //coding here
+  let m = 1;
+  do {
+    if (m % 2 === 0) str = str + "*";
+    else str = "*" + str;
+
+    m++;
+  } while (n >= m);
+
+  return str;
+}
+console.log("padIt:" + padIt("a", 5)); // Expected output: "*a**"
+
+/**
+ * 
+Task:9
+Complete the function howManydays. It accepts 1 parameter month, which means the month of the year. Different months have a different number of days as shown in the table below. Return the number of days that are in month. There is no need for input validation: month will always be greater than 0 and less than or equal to 12.
+
++---------------+-------------+
+|    month      |    days     |
++---------------+-------------+
+|1,3,5,7,8,10,12|     31      |
++---------------+-------------+
+|4,6,9,11       |     30      |
++---------------+-------------+
+|2              |     28      |  (Do not consider the leap year)
++---------------+-------------+
+Tip: Using default for most of the cases can reduce your work.
+ */ function howManydays(month) {
+  var days;
+  switch (month) {
+    case 1:
+      days = 31;
+      break;
+
+    case 2:
+      days = 28;
+      break;
+
+    case 3:
+      days = 31;
+      break;
+
+    case 4:
+      days = 30;
+      break;
+
+    case 5:
+      days = 31;
+      break;
+
+    case 6:
+      days = 30;
+      break;
+
+    case 7:
+      days = 31;
+      break;
+
+    case 8:
+      days = 31;
+      break;
+
+    case 9:
+      days = 30;
+      break;
+
+    case 10:
+      days = 31;
+      break;
+
+    case 11:
+      days = 30;
+      break;
+
+    case 12:
+      days = 31;
+      break;
+  }
+  return days;
+}
+
+/**
+ * Task:10
+ * Task
+Coding in function trueOrFalse, function accept 1 parameters
+:val, try to use the conditional statement if...else, if val 
+value is false (val==false or it can convert to false), should 
+return a string "false", if not, return a string "true".
+
+When you have finished the work, click "Run Tests" to see 
+if your code is working properly.
+
+In the end, click "Submit" to submit your code pass this kat
+ */
+
+function trueOrFalse(val) {
+  if (!val) return "false";
+  else return "true";
+}
+
+/**
+ * task:11
+ * In case you got lost, here's precisely
+ *  what you have to do: define a method Number.prototype.
+ * times that accepts a function f as an argument and executes
+ *  it as many times as the integer it is called on (e.g. (100).times would
+ * execute something 100 times). The iteration variable i should be supplied
+ * to the anonymous function being executed in order to support looping through array elements.
+ */
+
+Number.prototype.times = function (f) {
+  const n = Number(this); // convert 'this' to a primitive number
+  for (let i = 0; i < n; i++) {
+    f(i); // call the function with the current index
+  }
+};
+let sum = 0;
+
+(1).times(function (i) {
+  console.log("result" + sum);
+  sum += i + 1; // adds 1..5 to sum
+});
+console.log(sum);
+
+/**
+ *
+ * task:12
+ * In JavaScript, there is a special case where strict comparison
+ * of the same variable returns false! Try to find out what must
+ *  be done to get such result!
+ *
+ *
+ */
+
+function findStrangeValue() {
+  // your code!
+  let x = NaN;
+  console.log(x === x); // false
+  return x;
 }
