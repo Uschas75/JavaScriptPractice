@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
  "scripts": {
-    "start": "node \"8kyu/basicControlLogic.js\""
+    "start": "node \"7kyu/basicControlLogic7kyu.js\""
   },
   "author": "",
   "license": "ISC",
