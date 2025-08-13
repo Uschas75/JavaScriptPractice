@@ -137,3 +137,4 @@ solution(5); // should return "Value is 00005"
 
 
 console.log(solution("8")); // solution("12345"); // Expected output: "Value is 12345"
+
