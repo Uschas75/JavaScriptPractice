@@ -195,3 +195,4 @@ function countLoopIterations(arr){
 
 // Example usage
 console.log(countLoopIterations([[7, true], [5, false]])); // Expected output: [9, 6]
+console.log(countLoopIterations([[7, true], [5, false]])); // Expected output: [9, 6]
