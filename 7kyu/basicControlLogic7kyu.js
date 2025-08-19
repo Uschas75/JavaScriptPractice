@@ -177,6 +177,17 @@ The range of upper boundary is as follows: 1 <= V <= 20
 }
  */
 
+function countLoopIterations(arr) {
+  let result = [],
+      product = 1n; 
+  for (let [num, bool] of arr) {
+    let count = BigInt(num) + 1n + (bool ? 1n : 0n); 
+    result.push(count * product);
+    product *= count - 1n;
+  } 
+  return result;
+}
+
 function countLoopIterations(arr){
   let result = [];
   let outerProduct = 1n;
