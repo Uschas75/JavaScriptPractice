@@ -194,7 +194,7 @@ function countLoopIterations(arr){
 
   for (const [Vraw, inc] of arr) {
     const V = BigInt(Vraw);
-    const iterations = inc ? V + 1n : V;          // 0..V (inc) or 0..V-1 (exc)
+    const iterations = inc ? V + 1n : V;          // if inclusive(2nd value) , is true then v + 1n if not then v; 
     const perRunChecks = iterations + 1n;         // extra failing check
     const totalChecks = perRunChecks * outerProduct;
 
