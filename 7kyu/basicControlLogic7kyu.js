@@ -190,7 +190,8 @@ function countLoopIterations(arr) {
 
 function countLoopIterations(arr){
   let result = [];
-  let outerProduct = 1n;
+  let outerProduct = 1n;   // Initialize outer product to 1n (BigInt). this integer will be huge, cause sometimes the loop 
+   //will run for 20 times, so we need to use BigInt to avoid overflow.
 
   for (const [Vraw, inc] of arr) {
     const V = BigInt(Vraw);
