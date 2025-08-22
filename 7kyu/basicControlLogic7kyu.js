@@ -234,7 +234,8 @@ For example if the function receive -rwxr-xr-x it should return file.
 
 
 
-function linuxType(fileAttribute) {
+function linuxType(fileAttribute) { // I have to check the first character of the fileAttribute string
+  //then I have to return the corresponding file type as a string.
 const typeMap = {
     '-': 'file',
     'd': 'directory',
@@ -246,5 +247,6 @@ const typeMap = {
     'D': 'door'
   };
 
-  return typeMap[fileAttribute[0]] || 'unknown';
+  return typeMap[fileAttribute[0]] || 'unknown'; //the first character will be used as the key to access the file type then 
+  //return the corresponding value from the typemap object or return 'unknown' if the first character is not in the typemap.
 }
