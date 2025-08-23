@@ -24,8 +24,6 @@ function smallEnough(a, limit, index = 0) {
 }
 // console.log("result: " + smallEnough([1, 2, 3, 4, 4], 5)); // Expected output: true
 
-
-
 /**
  * 
 task:2
@@ -58,10 +56,6 @@ If a step takes you to an index outside the array, the traversal ends
  — return False (or your language's equivalent).
  */
 
-
-
-
-
 function hasLoop(indices, i = 0, visited = new Set()) {
   // If index is out of bounds, no loop
   if (i < 0 || i >= indices.length) return false;
@@ -75,7 +69,6 @@ function hasLoop(indices, i = 0, visited = new Set()) {
   // Recursive call to next index
   return hasLoop(indices, indices[i], visited);
 }
-
 
 /**
  * task:3
@@ -102,21 +95,18 @@ You can assume that there will be no division by 0
  */
 function calcType(a, b, res) {
   // your code here
-  if(a+b === res) return "addition";
-  if(a-b === res || b-a === res) return "subtraction";
-  if(a ===1 || b===1 ){
-    if(a /b === res || b / a === res && a*b !== res) return "division";
+  if (a + b === res) return "addition";
+  if (a - b === res || b - a === res) return "subtraction";
+  if (a === 1 || b === 1) {
+    if (a / b === res || (b / a === res && a * b !== res)) return "division";
     else return "multiplication";
   }
-  if(a /b === res || b / a === res) return "division";
+  if (a / b === res || b / a === res) return "division";
   else return "multiplication";
-
-
 }
 
 console.log(calcType(1, 2, 2)); // Expected output: "addition"
- console.log(calcType(5, 2, 2.5)); // Expected output: "division" 
-
+console.log(calcType(5, 2, 2.5)); // Expected output: "division"
 
 /**
  * 
@@ -129,16 +119,12 @@ Example:
 solution(5); // should return "Value is 00005"
  */
 
- function solution(value){
-  
+function solution(value) {
   //...
   return `Value is ${String(value).padStart(5, "0")}`;
 }
 
-
 console.log(solution("8")); // solution("12345"); // Expected output: "Value is 12345"
-
-
 
 /**
  * task:5
@@ -179,24 +165,24 @@ The range of upper boundary is as follows: 1 <= V <= 20
 
 function countLoopIterations(arr) {
   let result = [],
-      product = 1n; 
+    product = 1n;
   for (let [num, bool] of arr) {
-    let count = BigInt(num) + 1n + (bool ? 1n : 0n); 
+    let count = BigInt(num) + 1n + (bool ? 1n : 0n);
     result.push(count * product);
     product *= count - 1n;
-  } 
+  }
   return result;
 }
 
-function countLoopIterations(arr){
+function countLoopIterations(arr) {
   let result = [];
-  let outerProduct = 1n;   // Initialize outer product to 1n (BigInt). this integer will be huge, cause sometimes the loop 
-   //will run for 20 times, so we need to use BigInt to avoid overflow.
+  let outerProduct = 1n; // Initialize outer product to 1n (BigInt). this integer will be huge, cause sometimes the loop
+  //will run for 20 times, so we need to use BigInt to avoid overflow.
 
   for (const [Vraw, inc] of arr) {
     const V = BigInt(Vraw);
-    const iterations = inc ? V + 1n : V;          // if inclusive(2nd value) , is true then v + 1n if not then v; 
-    const perRunChecks = iterations + 1n;         // extra failing check
+    const iterations = inc ? V + 1n : V; // if inclusive(2nd value) , is true then v + 1n if not then v;
+    const perRunChecks = iterations + 1n; // extra failing check
     const totalChecks = perRunChecks * outerProduct;
 
     result.push(totalChecks);
@@ -206,8 +192,20 @@ function countLoopIterations(arr){
 }
 
 // Example usage
-console.log(countLoopIterations([[7, true], [5, false]])); // Expected output: [9, 6]
-console.log(countLoopIterations([[7, true], [5, false]])); // Expected output: [9, 6]
+/*
+console.log(
+  countLoopIterations([
+    [7, true],
+    [5, false],
+  ])
+); // Expected output: [9, 6]
+console.log(
+  countLoopIterations([
+    [7, true],
+    [5, false],
+  ])
+); // Expected output: [9, 6]
+*/
 
 /**
  * task:6
@@ -232,21 +230,140 @@ as a string regarding the file_attribute given by the ls -l command.
 For example if the function receive -rwxr-xr-x it should return file.
  */
 
-
-
-function linuxType(fileAttribute) { // I have to check the first character of the fileAttribute string
+function linuxType(fileAttribute) {
+  // I have to check the first character of the fileAttribute string
   //then I have to return the corresponding file type as a string.
-const typeMap = {
-    '-': 'file',
-    'd': 'directory',
-    'l': 'symlink',
-    'c': 'character_file',
-    'b': 'block_file',
-    'p': 'pipe',
-    's': 'socket',
-    'D': 'door'
+  const typeMap = {
+    "-": "file",
+    d: "directory",
+    l: "symlink",
+    c: "character_file",
+    b: "block_file",
+    p: "pipe",
+    s: "socket",
+    D: "door",
   };
 
-  return typeMap[fileAttribute[0]] || 'unknown'; //the first character will be used as the key to access the file type then 
+  return typeMap[fileAttribute[0]] || "unknown"; //the first character will be used as the key to access the file type then
   //return the corresponding value from the typemap object or return 'unknown' if the first character is not in the typemap.
 }
+
+/**
+ * task:7
+ * In ECMAScript 2020, there is a new operator ?. 
+ * called the optional chaining operator. This operator is available from Node.js v14 onwards.
+It's nothing revolutionary - just an example of syntactic sugar but a pretty neat one.
+
+Use case
+Imagine you have a Car, the car has an Engine, the engine has a 
+Gearbox and the gearbox has some property you are interested in, 
+for example numberOfGears. Now, the car could be from junkyard and 
+the gearbox or even the engine could be missing (null).
+The name of each property is the name of the class it contains, 
+converted to the appropriate case, such that if all components are present 
+the final property could be accessed by:
+Car.engine.gearbox.numberOfGears
+How to determine the number of gears in a car?
+Instructions
+Complete the method called getNumberOfGears being added to the 
+prototype of the Car class. This method will return the value of 
+the numberOfGears property of the gearbox or null if the gearbox (or anything else) is missing.
+
+Constraints
+Find some information about the ?. and ?? operators and try to write 
+the method without using if or the ternary operator ?:.
+ */
+class Car {
+  constructor(engine, gearbox, numberOfGears) {
+    this.engine = engine;
+    this.gearbox = gearbox;
+    this.numberOfGears = numberOfGears;
+  }
+
+  getNumberOfGears() {
+    return this.engine?.gearbox?.numberOfGears ?? null;
+  }
+}
+
+/**
+ * 
+ * task:8
+ * Write a function inverse_slice that takes three arguments: 
+ * a list items, an integer a and an integer b. The function 
+ * should return a new list with the slice specified by items[a:b] excluded.
+
+For example:
+
+>>>inverse_slice([12, 14, 63, 72, 55, 24], 2, 4)
+[12, 14, 55, 24]
+Input domain:
+
+items will always be a valid sequence.
+b will always be greater than a.
+a will always be greater than or equal to zero.
+a will always be less than the length of items.
+b may be greater than the length of items
+
+ */
+
+function inverseSlice(items, a, b) {
+  return items.slice(0, a).concat(items.slice(b + 1));
+}
+// console.log(inverseSlice([12, 14, 63, 72, 55, 24], 2, 3)); // Expecte output: [12, 14, 55, 24]
+
+/**
+ * task: 9
+ * This should be fairly simple. It is more of 
+ * a puzzle than a programming problem.
+There will be a string input in this 
+format: 'a+b' 2 lower case letters (a-z) seperated by a '+'
+Return the sum of the two variables.
+There is one correct answer for a pair of variables.
+I know the answers, it is your task to find out.
+Once you crack the code for one or two of the pairs, 
+you will have the answer for the rest.
+It is like when you were in school doing math and you
+ saw "11 = c+h" and you needed to find out what c and h were.
+However you don't have an 11. You have an unknown there as well. Example:
+X = a+b.
+You don't know what X is, and you don't know what b is or a,
+ but it is a puzzle and you will find out.
+As part of this puzzle, there is three hints or clues on solving
+ this. I won't tell you what the other two are, but one of them is:
+  Don't overthink it. It is a simple solution 
+Given the input as a string - Return the sum of the two variables as int.
+ */
+function theVar(theVariables) { //input will be a string also not like number in string format
+  // your code here
+  return    theVariables.split("+")[0].charCodeAt(0) -96 + theVariables.split("+")[1].charCodeAt(0) -96;
+}
+// console.log(theVar("c+d")); // Expected output: 2
+
+/**
+ * task:10
+ * You have a two-dimensional list in the following format:
+
+data = [[2, 5], [3, 4], [8, 7]]
+Each sub-list contains two items, and each item in the sub-lists is an integer.
+
+Write a function process_data()/processData() that processes each sub-list like so:
+
+[2, 5] --> 2 - 5 --> -3
+[3, 4] --> 3 - 4 --> -1
+[8, 7] --> 8 - 7 --> 1
+and then returns the product of all the processed sub-lists: -3 * -1 * 1 --> 3.
+
+For input, you can trust that neither the main list nor the sublists will be empty.
+ */
+
+function processData(data){
+  //your code here
+  let result = 1;
+  data.forEach((el, i ) => {
+  // code to run
+  data[i] = el.reduce((a,b) => a-b);
+    result *= data[i];
+  });
+return result;
+}
+console.log(processData([[2, 8], [3, 4], [8, 7]])); // Expected output: 3
