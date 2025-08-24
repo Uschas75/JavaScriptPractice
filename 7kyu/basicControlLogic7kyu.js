@@ -333,9 +333,15 @@ As part of this puzzle, there is three hints or clues on solving
   Don't overthink it. It is a simple solution 
 Given the input as a string - Return the sum of the two variables as int.
  */
-function theVar(theVariables) { //input will be a string also not like number in string format
+function theVar(theVariables) {
+  //input will be a string also not like number in string format
   // your code here
-  return    theVariables.split("+")[0].charCodeAt(0) -96 + theVariables.split("+")[1].charCodeAt(0) -96;
+  return (
+    theVariables.split("+")[0].charCodeAt(0) -
+    96 +
+    theVariables.split("+")[1].charCodeAt(0) -
+    96
+  );
 }
 // console.log(theVar("c+d")); // Expected output: 2
 
@@ -356,14 +362,96 @@ and then returns the product of all the processed sub-lists: -3 * -1 * 1 --> 3.
 For input, you can trust that neither the main list nor the sublists will be empty.
  */
 
-function processData(data){
+function processData(data) {
   //your code here
   let result = 1;
-  data.forEach((el, i ) => {
-  // code to run
-  data[i] = el.reduce((a,b) => a-b);
+  data.forEach((el, i) => {
+    // code to run
+    data[i] = el.reduce((a, b) => a - b);
     result *= data[i];
   });
-return result;
+  return result;
 }
-console.log(processData([[2, 8], [3, 4], [8, 7]])); // Expected output: 3
+console.log(
+  processData([
+    [2, 8],
+    [3, 4],
+    [8, 7],
+  ])
+); // Expected output: 3
+
+/**
+ * task:11
+ * 
+ * Given: a sequence of different type of values (number, string, boolean).
+ *  You should return an object with a separate properties for each of types
+ *  presented in input. Each property should contain an array of corresponding values.
+
+keep order of values like in input array
+if type is not presented in input, no corresponding property are expected
+So, for this input:
+
+['a', 1, 2, false, 'b']
+expected output is:
+
+{
+  number: [1, 2],
+  string: ['a', 'b'],
+  boolean: [false]
+}
+ */
+
+function separateTypes(input) {
+  let result = {};
+  input.forEach((el) => {
+    result[typeof el] = result[typeof el] || [];
+    for (let key in result) {
+      if (key === typeof el) {
+        result[key].push(el);
+      }
+    }
+  });
+
+  return result;
+}
+
+// console.log(separateTypes(["a", 1, 2, false, "b"])); // Expected output: { number: [1, 2], string: ['a', 'b'], boolean: [false] }
+
+/**
+ * task:12
+ * Write a function loopArr that loops array in a specified direction by some number of steps.
+
+By "looping array" it means removing elements from start and 
+adding them to end of array one-by-one (if direction is "left") or 
+removing from end and adding them to start one by-one (if direction is "right").
+
+Function should accept three arguments:
+
+array - non-empty array of elements of any type;
+direction - 'left' or 'right' - tells how to loop array;
+steps - number of steps to loop array (less or equal to array size);
+Examples:
+
+loopArr([1, 5, 87, 45, 8, 8], 'left', 2);
+should produce result: [87, 45, 8, 8, 1, 5]
+
+loopArr([1, 5, 87, 45, 8, 8], 'right', 2);
+should produce result: [8, 8, 1, 5, 87, 45]
+ */
+
+function loopArr(arr, direction, steps) {
+  if(direction === "left"){    
+    return (arr.slice(steps)).concat(arr.slice(0, steps)).flat();; 
+  }
+  else if(direction === "right"){
+    if(direction === "left"){    
+    return (arr.slice(0, steps)).concat(arr.slice(steps)).flat();; 
+  }
+  }
+  // arr.forEach(element => {
+    
+  // });
+
+}
+// console.log(loopArr([1, 5, 87, 45, 8, 8], "left", 2)); // Expected output: [87, 45, 8, 8, 1, 5]
+console.log(loopArr([1, 5, 87, 45, 8, 8], "right", 2)); // Expected output: [8, 8, 1, 5, 87, 45]
