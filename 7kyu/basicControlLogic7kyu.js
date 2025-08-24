@@ -444,14 +444,32 @@ function loopArr(arr, direction, steps) {
     return (arr.slice(steps)).concat(arr.slice(0, steps)).flat();; 
   }
   else if(direction === "right"){
-    if(direction === "left"){    
-    return (arr.slice(0, steps)).concat(arr.slice(steps)).flat();; 
-  }
+    
+    return (arr.slice( arr.length-steps)).concat(arr.slice(0, arr.length-steps)).flat();
+  
   }
   // arr.forEach(element => {
     
   // });
 
 }
-// console.log(loopArr([1, 5, 87, 45, 8, 8], "left", 2)); // Expected output: [87, 45, 8, 8, 1, 5]
-console.log(loopArr([1, 5, 87, 45, 8, 8], "right", 2)); // Expected output: [8, 8, 1, 5, 87, 45]
+// console.log(loopArr([1, 5, 87, 45, 8, 8], "left", 2)); // Expected output: [87, 45, 8, 8, 1, 5]`
+// console.log(loopArr([1, 5, 87, 45, 8, 8], "right", 2)); // Expected output: [8, 8, 1, 5, 87, 45]
+
+/**
+ * task:13
+ * Create a function to return true type of variable, i.e.
+
+type([]) == 'array'
+type({}) == 'object'
+type('') == 'string'
+type(NaN) == 'number'
+ */
+
+function type(value) {
+  if(typeof value){
+     return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+  }
+ 
+}
+console.log(type({})); // Expected output: 'array'
