@@ -1,5 +1,5 @@
 /**
- * Task:1
+ * Task:13
  * You will be given an array (a) and a limit value (limit)..
  *  You must check that all values in the array are below or 
  * equal to the limit value. If they are, return true. Else, return false.
@@ -26,7 +26,7 @@ function smallEnough(a, limit, index = 0) {
 
 /**
  * 
-task:2
+task:14
 Loop Detector
 In this kata, you'll simulate traversing a one-way pointer chain, 
 similar to a singly linked list. Each element in the input list 
@@ -71,7 +71,7 @@ function hasLoop(indices, i = 0, visited = new Set()) {
 }
 
 /**
- * task:3
+ * task:14
  * You have to create a function which receives 3 
  * number arguments: 2 operands a and b, and the 
  * result of an unknown operation performed on them.
@@ -110,7 +110,7 @@ console.log(calcType(5, 2, 2.5)); // Expected output: "division"
 
 /**
  * 
-task:4
+task:15
 Complete the solution so that it returns a formatted string. 
 The return value should equal "Value is VALUE" where value is a 5 digit padded number.
 
@@ -127,7 +127,7 @@ function solution(value) {
 console.log(solution("8")); // solution("12345"); // Expected output: "Value is 12345"
 
 /**
- * task:5
+ * task:16
  * 
 Task
 
@@ -208,7 +208,7 @@ console.log(
 */
 
 /**
- * task:6
+ * task:17
  * On Unix system type files can be identified with the ls -l
  *  command which displays the type of the file in the first 
  * alphabetic letter of the file system permissions field. You 
@@ -249,7 +249,7 @@ function linuxType(fileAttribute) {
 }
 
 /**
- * task:7
+ * task:18
  * In ECMAScript 2020, there is a new operator ?. 
  * called the optional chaining operator. This operator is available from Node.js v14 onwards.
 It's nothing revolutionary - just an example of syntactic sugar but a pretty neat one.
@@ -287,7 +287,7 @@ class Car {
 
 /**
  * 
- * task:8
+ * task:19
  * Write a function inverse_slice that takes three arguments: 
  * a list items, an integer a and an integer b. The function 
  * should return a new list with the slice specified by items[a:b] excluded.
@@ -312,7 +312,7 @@ function inverseSlice(items, a, b) {
 // console.log(inverseSlice([12, 14, 63, 72, 55, 24], 2, 3)); // Expecte output: [12, 14, 55, 24]
 
 /**
- * task: 9
+ * task: 20
  * This should be fairly simple. It is more of 
  * a puzzle than a programming problem.
 There will be a string input in this 
@@ -346,7 +346,7 @@ function theVar(theVariables) {
 // console.log(theVar("c+d")); // Expected output: 2
 
 /**
- * task:10
+ * task:21
  * You have a two-dimensional list in the following format:
 
 data = [[2, 5], [3, 4], [8, 7]]
@@ -381,7 +381,7 @@ console.log(
 ); // Expected output: 3
 
 /**
- * task:11
+ * task:22
  * 
  * Given: a sequence of different type of values (number, string, boolean).
  *  You should return an object with a separate properties for each of types
@@ -418,7 +418,7 @@ function separateTypes(input) {
 // console.log(separateTypes(["a", 1, 2, false, "b"])); // Expected output: { number: [1, 2], string: ['a', 'b'], boolean: [false] }
 
 /**
- * task:12
+ * task:23
  * Write a function loopArr that loops array in a specified direction by some number of steps.
 
 By "looping array" it means removing elements from start and 
@@ -457,7 +457,7 @@ function loopArr(arr, direction, steps) {
 // console.log(loopArr([1, 5, 87, 45, 8, 8], "right", 2)); // Expected output: [8, 8, 1, 5, 87, 45]
 
 /**
- * task:13
+ * task:24
  * Create a function to return true type of variable, i.e.
 
 type([]) == 'array'
@@ -472,4 +472,27 @@ function type(value) {
   }
  
 }
-console.log(type({})); // Expected output: 'array'
+// console.log(type({})); // Expected output: 'array'
+
+/**
+ * task:25
+ * Array.prototype.ofType = function(type){}
+that will filter an array based on a supplied type.
+
+For example:
+
+var arr = [{ a: 'a' }, /a-z/, [1, 2, 3], i=>i];
+arr.ofType(Object) === [{ a: 'a' }, /a-z/, [1, 2, 3], i=>i];
+arr.ofType(RegExp) === [/a-z/];
+ */
+
+Array.prototype.ofType = function(type) {
+  return this.filter(el => {
+    if (type === Number) return typeof el === "number";
+    if (type === String) return typeof el === "string";
+    if (type === Boolean) return typeof el === "boolean";
+    return el instanceof type});
+};
+var arr = [{ a: 'a' }, /a-z/, [1, 2, 3], i=>i, 1, "string", true];
+let arr2 =  [1,2,3]
+console.log(arr.ofType(Number)); // Expected output: [{ a: 'a' },
