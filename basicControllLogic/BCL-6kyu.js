@@ -16,14 +16,13 @@ you can't use loops or hardcode (for, while)
  */
 
 function isPrime(n, divisor = 2) {
-    n = Math.abs(n);
-    if(n < 2) return false;
-    if(n % divisor === 0 && n!== divisor) return false;
-    if(divisor <= Math.sqrt(n)) return isPrime(n, divisor + 1);
+  n = Math.abs(n);
+  if (n < 2) return false;
+  if (n % divisor === 0 && n !== divisor) return false;
+  if (divisor <= Math.sqrt(n)) return isPrime(n, divisor + 1);
 
-    return true;
-
-};
+  return true;
+}
 
 /**
  * task: 27
@@ -99,23 +98,34 @@ Good luck!
 
 
  */
-function solve(s) {
-let newS = s.replaceAll("[backspace]", "#").replaceAll("#*", "").replaceAll("#",1).split("");
-let converted = newS.map(el => (isNaN(el) ? el : Number(el))); // isNaN = condition is not a number. el(true) : number(el)(false)
-let result = [];
-console.log(converted);
-  
-  for(let i = 0; i < converted.length; i++){
-    // console.log(converted[i]);
-    // console.log(typeof(converted[i]));
-    // console.log(typeof(converted[i]) === "number");
-    if(typeof(converted[i]) === "number"){
-      // console.log("dhukse");
-     console.log(converted.splice(i - converted[i],converted[i])); 
-    }
-    }
-  
- return converted;
- 
+function applyBackspaces(input) {
+  const out = [];
+  // Match [backspace] optionally followed by *<number>, e.g. [backspace], [backspace]*3
+  const re = /\[backspace](?:\*(\d+))?/gi;
+
+  let i = 0;
+  while (i < input.length) {
+    // Find the next backspace token
+    const m = re.exec(input);
+    const nextTokenStart = m ? m.index : input.length;
+
+    // Push all literal characters up to the token (letters/spaces per problem)
+    for (let j = i; j < nextTokenStart; j++) out.push(input[j]);
+
+    if (!m) break; // no more tokens
+
+    // How many backspaces to apply? default = 1
+    const count = m[1] ? parseInt(m[1], 10) : 1;
+
+    // Pop up to 'count' characters (ignore if nothing to delete)
+    for (let k = 0; k < count && out.length; k++) out.pop();
+
+    // Continue scanning after the token
+    i = re.lastIndex;
+  }
+
+  return out.join('');
 }
+
+
 console.log(solve("a[backspace]*2oopppp[backspace]*2[backspace]s"));
