@@ -102,6 +102,12 @@ function applyBackspaces(input) {
   const out = [];
   // Match [backspace] optionally followed by *<number>, e.g. [backspace], [backspace]*3
   const re = /\[backspace](?:\*(\d+))?/gi;
+  /**
+   *   / ... / → regex literal.
+      g → global flag (find all matches, not just the first).
+      i → case-insensitive flag.
+   * 
+   */
 
   let i = 0;
   while (i < input.length) {
@@ -124,8 +130,7 @@ function applyBackspaces(input) {
     i = re.lastIndex;
   }
 
-  return out.join('');
+  return out.join("");
 }
-
 
 console.log(solve("a[backspace]*2oopppp[backspace]*2[backspace]s"));
