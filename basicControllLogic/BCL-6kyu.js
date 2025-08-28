@@ -134,3 +134,27 @@ function applyBackspaces(input) {
 }
 
 console.log(solve("a[backspace]*2oopppp[backspace]*2[backspace]s"));
+
+
+
+/**
+ * function combine()
+that combines arrays by alternatingly taking elements passed to it.
+combine(['a', 'b', 'c'], [1, 2, 3]) == ['a', 1, 'b', 2, 'c', 3]
+combine(['a', 'b', 'c'], [1, 2, 3, 4, 5]) == ['a', 1, 'b', 2, 'c', 3, 4, 5]
+combine(['a', 'b', 'c'], [1, 2, 3, 4, 5], [6, 7], [8]) == ['a', 1, 6, 8, 'b', 2, 7, 'c', 3, 
+ */
+function combine(...args) {
+  let result = [];
+  let maxLength = Math.max(...args.map(arr => arr.length));
+
+  for (let i = 0; i < maxLength; i++) {
+    for (let arr of args) {
+      if (i < arr.length) {
+        result.push(arr[i]);
+      }
+    }
+  }
+
+  return result;
+}
