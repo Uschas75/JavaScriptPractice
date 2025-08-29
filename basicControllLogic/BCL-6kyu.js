@@ -98,7 +98,7 @@ Good luck!
 
 
  */
-function applyBackspaces(input) {
+function solve(input) {
   const out = [];
   // Match [backspace] optionally followed by *<number>, e.g. [backspace], [backspace]*3
   const re = /\[backspace](?:\*(\d+))?/gi;
@@ -135,8 +135,6 @@ function applyBackspaces(input) {
 
 console.log(solve("a[backspace]*2oopppp[backspace]*2[backspace]s"));
 
-
-
 /**
  * function combine()
 that combines arrays by alternatingly taking elements passed to it.
@@ -146,7 +144,7 @@ combine(['a', 'b', 'c'], [1, 2, 3, 4, 5], [6, 7], [8]) == ['a', 1, 6, 8, 'b', 2,
  */
 function combine(...args) {
   let result = [];
-  let maxLength = Math.max(...args.map(arr => arr.length));
+  let maxLength = Math.max(...args.map((arr) => arr.length));
 
   for (let i = 0; i < maxLength; i++) {
     for (let arr of args) {
@@ -158,3 +156,136 @@ function combine(...args) {
 
   return result;
 }
+// console.log(combine(['a', 'b', 'c'], [1, 2, 3, 4, 5], [6, 7], [8]));
+
+/**
+ * 
+ * task: 28
+
+Been a while, but here's part 2!
+
+You are given a string of lowercase letters and spaces that you need to type out. In the string there is a special function: [shift]. Once you encounter a [shift] , you capitalise the character right after it, as if you're actually holding the key. Return the final string .
+
+
+
+e.g. [shift]john [shift]green return John Green (capitalise the j and g)
+
+Walkthrough:
+
+[shift]
+J capitalise the j
+Jo
+Joh
+John
+John[space]
+John G capitalise the g
+John Gr
+John Gre
+John Gree
+John Green
+
+John Green
+
+
+
+e.g. [shift]n[shift]o[shift]o[shift]o return NOOO (capitalise all the letters)
+
+Walkthrough:
+
+[shift]
+N capitalise the n
+NO capitalise the O
+NOO capitalise the O
+NOOO capitalise the O
+
+NOOO
+
+Notice if we want to capitalise a long string of letters, it will look very confusing viually. So, let's add two new functions, holdshift and unshift. It's self-explanatory.
+
+
+
+Some examples:
+
+[holdshift]uppercase[unshift] return UPPERCASE (holdshift all letters)
+
+Walkthrough:
+
+[holdshift]
+U
+UP
+UPP
+...
+
+UPPERCASE
+[unshift]
+
+UPPERCASE
+
+
+
+unshift can also apply to normal shift, but since normal shift only affects the character right after, unshift would have to be directly after normal shift for it to affect it.
+
+Example: [shift][unshift]dont [shift][unshift]shift returns dont shift
+
+Walkthrough:
+
+[shift][unshift] cancels
+dont[space]
+[shift][unshift] cancels
+dont shift
+
+dont shift
+
+
+
+Whew! That was lengthy!
+
+Ok, to summerise:
+
+[shift] capitalises the character right after it ([shift]a -> A)
+[holdshift] capitalises all the characters after it until it reaches unshift ([holdshift]one[unshift]two -> ONEtwo)
+[unshift] releases shift (either [shift] or [holdshift])
+[shift][unshift]d returns d
+Other necessary things you might want to know:
+
+Shifting a space is a space
+After a [holdshift], there is always an unshift, without any functions in between
+After unshifting, the next function called will not be an unshift (you can't release something if you're not pressing it)
+Things like [shift][holdshift] or [shift][shift] or [holdshift][shift]can't occur, but [shift][unshift] can
+The string will never start with [unshift] for obvious reasons
+Good luck! More examples in the example tests (The description took me way too long lol)
+
+Please give this a good rating, I spent a really long time coding this.
+
+Thank you!
+ */
+const typeOut = (str) => {
+  // Here be dragons
+  const re = /\[(unshift|holdshift|shift)\]/gi;
+  str = str.replaceAll("[shift]", 1);
+  str = str.replaceAll("[holdshift]", 2);
+  str = str.replaceAll("[unshift]", 0);
+  let arr = str.split("");
+  let x = 0;
+  for (let key in arr) {
+    arr[key] = isNaN(arr[key]) ? arr[key] : Number(arr[key]);
+    
+    console.log(typeof arr[key]);
+    if (typeof arr[key] === "number") {
+      x = arr[key];
+    }
+  }
+  // if(x === 1){
+  //   arr[key] = arr[key].toUpperCase();
+  //  console.log(arr[key]);
+
+  //   x = 0;
+  // }
+  // if(x === 2){
+  //   arr[key] = arr[key].toUpperCase();
+  // }
+
+  return arr;
+  // return re.exec(str);
+};
+console.log(typeOut("hello [shift]world [holdshift]oops[unshift] done")); // UPPERCASE
