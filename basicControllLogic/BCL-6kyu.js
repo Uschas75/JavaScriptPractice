@@ -262,17 +262,38 @@ Thank you!
 const typeOut = (str) => {
   // Here be dragons
   const re = /\[(unshift|holdshift|shift)\]/gi;
-  str = str.replaceAll("[shift]", 1);
-  str = str.replaceAll("[holdshift]", 2);
-  str = str.replaceAll("[unshift]", 0);
+  str = str.replaceAll("[shift]", 2);
+  str = str.replaceAll("[holdshift]", 3);
+  str = str.replaceAll("[unshift]", 1);
   let arr = str.split("");
-  let x = 0;
+  let x = 1;
+  let result = [];
   for (let key in arr) {
     arr[key] = isNaN(arr[key]) ? arr[key] : Number(arr[key]);
-    
-    console.log(typeof arr[key]);
-    if (typeof arr[key] === "number") {
-      x = arr[key];
+
+    if ((x === 2 || x === 3) && arr[key] !== 0) {
+      if (typeof arr[key] === "string") {
+        arr[Number(key)] = arr[Number(key)].toUpperCase();
+      }
+      if (x === 2) {
+        x = 1;
+      }
+    }
+
+    if (arr[key] === 2) {
+      x = 2;
+    }
+    if (arr[key] === 3) {
+      x = 3;
+    }
+    if (arr[key] === 1) {
+      x = 1;
+    }
+    if(arr[key] === 0 && x !== 3){
+      x =1;
+    }
+    if (typeof arr[key] === "string" || arr[key] === 0) {
+      arr[key] === 0 ? result.push(" ") : result.push(arr[key]);
     }
   }
   // if(x === 1){
@@ -285,7 +306,7 @@ const typeOut = (str) => {
   //   arr[key] = arr[key].toUpperCase();
   // }
 
-  return arr;
+  return result.join("");
   // return re.exec(str);
 };
 console.log(typeOut("hello [shift]world [holdshift]oops[unshift] done")); // UPPERCASE
