@@ -163,13 +163,11 @@ function combine(...args) {
  * task: 28
 
 Been a while, but here's part 2!
-
-You are given a string of lowercase letters and spaces that you need to type out. In the string there is a special function: [shift]. Once you encounter a [shift] , you capitalise the character right after it, as if you're actually holding the key. Return the final string .
-
-
+You are given a string of lowercase letters and spaces that you need to type out.
+In the string there is a special function: [shift]. Once you encounter a [shift] ,
+you capitalise the character right after it, as if you're actually holding the key. Return the final string .
 
 e.g. [shift]john [shift]green return John Green (capitalise the j and g)
-
 Walkthrough:
 
 [shift]
@@ -185,9 +183,6 @@ John Gree
 John Green
 
 John Green
-
-
-
 e.g. [shift]n[shift]o[shift]o[shift]o return NOOO (capitalise all the letters)
 
 Walkthrough:
@@ -200,16 +195,11 @@ NOOO capitalise the O
 
 NOOO
 
-Notice if we want to capitalise a long string of letters, it will look very confusing viually. So, let's add two new functions, holdshift and unshift. It's self-explanatory.
-
-
-
+Notice if we want to capitalise a long string of letters, it will look very confusing
+viually. So, let's add two new functions, holdshift and unshift. It's self-explanatory.
 Some examples:
-
 [holdshift]uppercase[unshift] return UPPERCASE (holdshift all letters)
-
 Walkthrough:
-
 [holdshift]
 U
 UP
@@ -220,10 +210,9 @@ UPPERCASE
 [unshift]
 
 UPPERCASE
-
-
-
-unshift can also apply to normal shift, but since normal shift only affects the character right after, unshift would have to be directly after normal shift for it to affect it.
+unshift can also apply to normal shift, but since normal shift only
+affects the character right after, unshift would have to be directly
+after normal shift for it to affect it.
 
 Example: [shift][unshift]dont [shift][unshift]shift returns dont shift
 
@@ -233,11 +222,7 @@ Walkthrough:
 dont[space]
 [shift][unshift] cancels
 dont shift
-
 dont shift
-
-
-
 Whew! That was lengthy!
 
 Ok, to summerise:
@@ -289,8 +274,8 @@ const typeOut = (str) => {
     if (arr[key] === 1) {
       x = 1;
     }
-    if(arr[key] === 0 && x !== 3){
-      x =1;
+    if (arr[key] === 0 && x !== 3) {
+      x = 1;
     }
     if (typeof arr[key] === "string" || arr[key] === 0) {
       arr[key] === 0 ? result.push(" ") : result.push(arr[key]);
@@ -309,4 +294,183 @@ const typeOut = (str) => {
   return result.join("");
   // return re.exec(str);
 };
-console.log(typeOut("hello [shift]world [holdshift]oops[unshift] done")); // UPPERCASE
+// console.log(typeOut("hello [shift]world [holdshift]oops[unshift] done")); // UPPERCASE
+
+/**
+ * task: 29
+ * Prehistory
+In JavaScript there are two operators that help us determine whether an
+operand belongs to a certain type or class, they are "typeof" and "instanceof",
+but both of these operators can fool us in some cases.
+
+Task
+You need to implement the function "f" which will determine the type of the passed
+argument without errors. The peculiarity of this task is the limitation on
+the number of characters in your solution, the length of your code must not exceed 45 characters.
+
+Note
+The "Symbol" and "RegExp" documentation will help you to solve this task, good luck :^)
+ */
+
+f = (x) => {
+  return Object.prototype.toString.call(x).slice(8, -1);
+}; //do your magick :･ﾟ✧:･ﾟ✧
+// console.log(  f(/abc/)); // "RegExp"
+// console.log(  f(Symbol('foo'))); // "Symbol"
+// console.log(  f(123)); // "Number"
+
+/**
+ * task: 30
+ * We know the formula to find the solutions of an equation of second degree with only one variable:
+
+source: imgur.com
+
+We need the function sec_deg_solver()/secDegSolver(), that accepts three arguments, a, b and c, the coefficients of the above equation.
+
+The outputs of the function may vary depending on the values of coefficients a, b and c, according to the following situations. (used values as examples only):
+
+
+- If a is equal 0:
+                  - If b and c are not 0. It will return: "It is a 
+                    first degree equation. Solution: 0.5512345"
+   
+                  - If a, b and c are 0. It will return: 
+                     "The equation is indeterminate"
+           
+                  - If a and b are 0, and c is not 0. It will 
+                     return: "Impossible situation. Wrong entries"
+                  
+                  - If a and c are 0 and b is not 0: It will return: "It is a first 
+                    degree equation. Solution: 0.0"
+
+- If a is not 0:
+                  - If Δ < 0 (see image above). It will return: "There are no real 
+                    solutions"
+
+                  - If Δ = 0. It will return: "It has one double solution: 
+                    1.4142135624"
+
+                  - If Δ > 0. It will return: "Two solutions: 1,7320508076, 2.0"
+                    (solutions should be sorted)
+The results should be expressed up to 10 decimals rounded result Let's see some cases:
+
+
+a = 0
+b = 2
+c = -4
+secDegSolver(a, b, c) == It is a first degree equation. Solution: 2
+
+a = 10
+b = 2
+c = -4
+secDegSolver(a, b, c) == Two solutions: -0.7403124237, 0.5403124237
+
+a = 1.5
+b = 2
+c = 4
+secDegSolver(a, b, c) == There are no real solutions
+
+a = 1
+b = -2
+c = 1
+secDegSolver(a, b, c) == It has one double solution: 1
+
+a = 0
+b = 0
+c = 0
+secDegSolver(a, b, c) == The equation is indeterminate
+
+a = 0
+b = 0
+c = 4
+secDegSolver(a, b, c) == "Impossible situation. Wrong entries"
+(Be aware that the result has a string format and -0.0 is not 0.0)
+
+Note on having two solutions: input them sorted numerically; 
+in the JavaScript version, not to put any extra difficulty 
+on this one, sort them with a simple .sort() (which will sort them lexicographically).
+
+Happy coding!!
+ */
+
+function secDegSolver(a, b, c) {
+  const fmt = (x) => {
+    const s = Number(x).toFixed(10);
+    const n = Number(s);
+    let out = s.replace(/\.?0+$/, "");
+    if (n === 0) out = "0"; // normalize -0 → 0 (see special case below)
+    return out;
+  };
+
+  if (a === 0) {
+    if (b !== 0 && c !== 0) {
+      return `It is a first degree equation. Solution: ${fmt(-c / b)}`;
+    }
+    if (b === 0 && c === 0) return "The equation is indeterminate";
+    if (b === 0 && c !== 0) return "Impossible situation. Wrong entries";
+    // spec explicitly wants "0.0" here
+    return "It is a first degree equation. Solution: 0.0";
+  }
+
+  const delta = b * b - 4 * a * c;
+  if (delta < 0) return "There are no real solutions";
+
+  if (delta === 0) {
+    const x = -b / (2 * a);
+    return `It has one double solution: ${fmt(x)}`;
+  }
+
+  const sqrtD = Math.sqrt(delta);
+  const x1 = (-b - sqrtD) / (2 * a);
+  const x2 = (-b + sqrtD) / (2 * a);
+
+  // Format first, then lexicographically sort strings (per kata note)
+  const roots = [fmt(x1), fmt(x2)].sort();
+  return `Two solutions: ${roots[0]}, ${roots[1]}`;
+}
+console.log(secDegSolver(10, 2, -4)); // Two solutions: -0.7403124237, 0.5403124237
+
+/**
+ * task: 31
+ * In this kata, you should calculate the type of triangle 
+ * with three given sides a, b and c (given in any order).
+If each angle is less than 90°, this triangle is acute and
+the function should return 1. If one angle is strictly 90°,
+this triangle is right and the function should return 2.
+If one angle is more than 90°, this triangle is obtuse and
+the function should return 3. If three sides cannot form a 
+triangle, or one angle is 180° (which turns the triangle 
+into a segment) - the function should return 0. Three input 
+parameters are sides of given triangle. All input values are 
+non-negative floating point or integer numbers (or both, depending on the language).
+Acute
+Right
+Obtuse
+Examples:
+(2, 4, 6) ---> return 0 (Not triangle)
+(8, 5, 7) ---> return 1 (Acute, angles are approx. 82°, 38° and 60°)
+(3, 4, 5) ---> return 2 (Right, angles are approx. 37°, 53° and exactly 90°)
+(7, 12, 8) ---> return 3 (Obtuse, angles are approx. 34°, 106° and 40°)
+If you stuck, this can help you: http://en.wikipedia.org/wiki/Law_of_cosines. But you can solve this kata even without angle calculation.
+There is a very small chance of random test to fail due to round-off error, in such case resubmit your solution.
+
+
+ */
+
+function triangleType(a, b, c) {
+  let arr = [a, b, c];
+  arr.sort((x, y) => x - y);
+  let result = arr[0] ** 2 + arr[1] ** 2 - arr[2] ** 2;
+ 
+  if (arr[0] + arr[1] > arr[2]) {
+    if (result > 0) return 1;
+    if (result === 0) return 2;
+    if (result < 0) return 3;
+  }
+  else{
+    return 0;
+  }
+
+  
+}
+console.log(triangleType(7, 12, 8)); // 3
