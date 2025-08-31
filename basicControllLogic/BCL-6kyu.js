@@ -474,3 +474,27 @@ function triangleType(a, b, c) {
   
 }
 console.log(triangleType(7, 12, 8)); // 3
+
+/**
+ * task: 32
+ * "Explain the question [You are provided with a function of the form f(x) = axⁿ, 
+ * that consists of a single term only and 'a' and 'n' are integers, e.g., f(x) = 3x², f(x) = 5 etc. 
+ * Your task is to create a function that takes f(x) as the argument and returns
+ *  the result of differentiating the function, that is, the derivative. If f(x) = axⁿ, 
+ * then f′(x) = naxⁿ⁻¹. Input is a string, for example '5x^4'. The function f(x) consists
+ *  of a single term only. Variable is denoted by x. Output should be a string, for example '20x^3'.]"
+ */
+function differentiate(f) {
+  //Write your code here
+  
+  let [a, n] = f.split("x");
+  a === "-" ? a = -1 : a = Number(a);
+  a === "" ? a =1 : a = Number(a);
+  n === "" ? n =1 : n = Number(n.slice(1));
+  console.log([a, n]);
+  // let find = n.match(/\^(\d+)/);
+  if ((n -1) === 0) return String(n*a); 
+  if((n-1) === 1) return `${n * a}x`;
+  return `${n * a}x^${n -1}`;
+}
+console.log(differentiate("-x^-2")); // '20x^3'
