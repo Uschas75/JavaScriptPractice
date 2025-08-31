@@ -486,15 +486,24 @@ console.log(triangleType(7, 12, 8)); // 3
  */
 function differentiate(f) {
   //Write your code here
-  
+  if(!f.includes("x")) return "0";
   let [a, n] = f.split("x");
+  console.log([a,n]);
   a === "-" ? a = -1 : a = Number(a);
-  a === "" ? a =1 : a = Number(a);
+  // a === "" ? a = 1 : a = Number(a);
+  a === 0 ? a = 1: a = Number(a);
+  console.log(a);
   n === "" ? n =1 : n = Number(n.slice(1));
   console.log([a, n]);
   // let find = n.match(/\^(\d+)/);
   if ((n -1) === 0) return String(n*a); 
   if((n-1) === 1) return `${n * a}x`;
+  if(a === 1 || a === -1) {
+   if (n*a === 1) return `x^${n -1}`;
+   if (n*a === -1) return `-x^${n -1}`;
+  }
+  
+  if(a === 1) return `${n * a}x^${n -1}`;
   return `${n * a}x^${n -1}`;
 }
-console.log(differentiate("-x^-2")); // '20x^3'
+console.log(differentiate("x^-2")); // '20x^3'
