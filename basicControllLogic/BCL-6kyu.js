@@ -523,3 +523,17 @@ Examples
 "i love programming" -> "RLRRLLRRLRLLLRRRRL"
 "  two spaces" -> "LLLLRLLRLLLL"
  */
+function f(abc){
+  const left = "12345qwertasdfgzxcvb ";
+  let result = "";
+  for(let i =0; i< abc.length; i++){
+    if(left.includes(abc[i])){
+      result +="L";
+    }
+    else{
+      result +="R";
+    }   
+  }
+  return result;
+}
+console.log(abc("i love programming")); // "RLRRLLRRLRLLLRRRRL"
