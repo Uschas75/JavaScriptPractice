@@ -526,9 +526,9 @@ Examples
 function f(abc){
   const left = "12345qwertasdfgzxcvb ";
   let result = "";
-  for(let i =0; i< abc.length; i++){
-    if(left.includes(abc[i])){
-      result +="L";
+  for(let i =0; i< abc.length; i++){ // i = index of char in abc
+    if(left.includes(abc[i])){ // abc[i] = char in abc
+      result +="L"; // if char in left, add L to result
     }
     else{
       result +="R";
