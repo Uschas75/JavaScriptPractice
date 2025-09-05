@@ -133,7 +133,7 @@ function solve(input) {
   return out.join("");
 }
 
-console.log(solve("a[backspace]*2oopppp[backspace]*2[backspace]s"));
+// console.log(solve("a[backspace]*2oopppp[backspace]*2[backspace]s"));
 
 /**
  * function combine()
@@ -428,7 +428,7 @@ function secDegSolver(a, b, c) {
   const roots = [fmt(x1), fmt(x2)].sort();
   return `Two solutions: ${roots[0]}, ${roots[1]}`;
 }
-console.log(secDegSolver(10, 2, -4)); // Two solutions: -0.7403124237, 0.5403124237
+// console.log(secDegSolver(10, 2, -4)); // Two solutions: -0.7403124237, 0.5403124237
 
 /**
  * task: 31
@@ -473,7 +473,7 @@ function triangleType(a, b, c) {
 
   
 }
-console.log(triangleType(7, 12, 8)); // 3
+// console.log(triangleType(7, 12, 8)); // 3
 
 /**
  * task: 32
@@ -506,7 +506,7 @@ function differentiate(f) {
   if(a === 1) return `${n * a}x^${n -1}`;
   return `${n * a}x^${n -1}`;
 }
-console.log(differentiate("x^-2")); // '20x^3'
+// console.log(differentiate("x^-2")); // '20x^3'
 /**
  * task: 33
  * In this kata you're given a string which can include English
@@ -523,17 +523,39 @@ Examples
 "i love programming" -> "RLRRLLRRLRLLLRRRRL"
 "  two spaces" -> "LLLLRLLRLLLL"
  */
-function f(abc){
-  const left = "12345qwertasdfgzxcvb ";
-  let result = "";
-  for(let i =0; i< abc.length; i++){ // i = index of char in abc
-    if(left.includes(abc[i])){ // abc[i] = char in abc
-      result +="L"; // if char in left, add L to result
+  function touchType(str) {
+  //good luck again!
+  const leftHand = "12345qwertasdfgzxcvb";
+  // console.log(leftHand.length);
+  let out = [];
+    // console.log(str.includes(leftHand[0]));
+    for(let i = 0; i < str.length; i++){
+      if(leftHand.includes(str[i]) || str[i] === " " && (i === 0 || str[i-1] === " " ||out[i - 1] === "R")){
+        // console.log("in");
+        out[i] = "L";
+      }
+      else{
+        out[i] = "R";
+        // console.log("in");
+
+      }
     }
-    else{
-      result +="R";
-    }   
-  }
-  return result;
+  return out.join("");
 }
-console.log(abc("i love programming")); // "RLRRLLRRLRLLLRRRRL"
+
+// console.log(touchType("i love programming")); // "RLRRLLRRLRLLLRRRRL"
+// console.log(touchType("  two spaces")); // "LLLLRLLRLLLL"
+// touchType("i love programming"); // "RLRRLLRRLRLLLRRRRL"
+
+/**
+ * task: 34
+ * You have to write an array() function returning an array object with elements as follow:
+
+[ 'array', 'boolean', 'function', 'number', 'object', 'string', 'undefined' ]
+Coding Limitation:
+Less than 60 characters
+ */
+
+array=()=>['array','boolean','function','number','object','string','undefined'];
+array=_=>[[1<2,f(),1,{},"s",_].forEach(e=>typeof e),`array`];
+console.log(array());
