@@ -557,5 +557,5 @@ Less than 60 characters
  */
 
 array=()=>['array','boolean','function','number','object','string','undefined'];
-array=_=>[[1<2,f(),1,{},"s",_].forEach(e=>typeof e),`array`];
+array=_=>[[[],1<2,()=>{},1,{},"s",_].map(e=>typeof e)]; // 59 chars
 console.log(array());
