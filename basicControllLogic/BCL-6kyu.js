@@ -461,50 +461,47 @@ function triangleType(a, b, c) {
   let arr = [a, b, c];
   arr.sort((x, y) => x - y);
   let result = arr[0] ** 2 + arr[1] ** 2 - arr[2] ** 2;
- 
+
   if (arr[0] + arr[1] > arr[2]) {
     if (result > 0) return 1;
     if (result === 0) return 2;
     if (result < 0) return 3;
-  }
-  else{
+  } else {
     return 0;
   }
-
-  
 }
 // console.log(triangleType(7, 12, 8)); // 3
 
 /**
  * task: 32
- * "Explain the question [You are provided with a function of the form f(x) = axⁿ, 
- * that consists of a single term only and 'a' and 'n' are integers, e.g., f(x) = 3x², f(x) = 5 etc. 
+ * "Explain the question [You are provided with a function of the form f(x) = axⁿ,
+ * that consists of a single term only and 'a' and 'n' are integers, e.g., f(x) = 3x², f(x) = 5 etc.
  * Your task is to create a function that takes f(x) as the argument and returns
- *  the result of differentiating the function, that is, the derivative. If f(x) = axⁿ, 
+ *  the result of differentiating the function, that is, the derivative. If f(x) = axⁿ,
  * then f′(x) = naxⁿ⁻¹. Input is a string, for example '5x^4'. The function f(x) consists
  *  of a single term only. Variable is denoted by x. Output should be a string, for example '20x^3'.]"
  */
 function differentiate(f) {
   //Write your code here
-  if(!f.includes("x")) return "0";
+  if (!f.includes("x")) return "0";
   let [a, n] = f.split("x");
-  console.log([a,n]);
-  a === "-" ? a = -1 : a = Number(a);
+  console.log([a, n]);
+  a === "-" ? (a = -1) : (a = Number(a));
   // a === "" ? a = 1 : a = Number(a);
-  a === 0 ? a = 1: a = Number(a);
+  a === 0 ? (a = 1) : (a = Number(a));
   console.log(a);
-  n === "" ? n =1 : n = Number(n.slice(1));
+  n === "" ? (n = 1) : (n = Number(n.slice(1)));
   console.log([a, n]);
   // let find = n.match(/\^(\d+)/);
-  if ((n -1) === 0) return String(n*a); 
-  if((n-1) === 1) return `${n * a}x`;
-  if(a === 1 || a === -1) {
-   if (n*a === 1) return `x^${n -1}`;
-   if (n*a === -1) return `-x^${n -1}`;
+  if (n - 1 === 0) return String(n * a);
+  if (n - 1 === 1) return `${n * a}x`;
+  if (a === 1 || a === -1) {
+    if (n * a === 1) return `x^${n - 1}`;
+    if (n * a === -1) return `-x^${n - 1}`;
   }
-  
-  if(a === 1) return `${n * a}x^${n -1}`;
-  return `${n * a}x^${n -1}`;
+
+  if (a === 1) return `${n * a}x^${n - 1}`;
+  return `${n * a}x^${n - 1}`;
 }
 // console.log(differentiate("x^-2")); // '20x^3'
 /**
@@ -523,23 +520,24 @@ Examples
 "i love programming" -> "RLRRLLRRLRLLLRRRRL"
 "  two spaces" -> "LLLLRLLRLLLL"
  */
-  function touchType(str) {
+function touchType(str) {
   //good luck again!
   const leftHand = "12345qwertasdfgzxcvb";
   // console.log(leftHand.length);
   let out = [];
-    // console.log(str.includes(leftHand[0]));
-    for(let i = 0; i < str.length; i++){
-      if(leftHand.includes(str[i]) || str[i] === " " && (i === 0 || str[i-1] === " " ||out[i - 1] === "R")){
-        // console.log("in");
-        out[i] = "L";
-      }
-      else{
-        out[i] = "R";
-        // console.log("in");
-
-      }
+  // console.log(str.includes(leftHand[0]));
+  for (let i = 0; i < str.length; i++) {
+    if (
+      leftHand.includes(str[i]) ||
+      (str[i] === " " && (i === 0 || str[i - 1] === " " || out[i - 1] === "R"))
+    ) {
+      // console.log("in");
+      out[i] = "L";
+    } else {
+      out[i] = "R";
+      // console.log("in");
     }
+  }
   return out.join("");
 }
 
@@ -556,6 +554,33 @@ Coding Limitation:
 Less than 60 characters
  */
 
-array=()=>['array','boolean','function','number','object','string','undefined'];
-array=_=>[[[],1<2,()=>{},1,{},"s",_].map(e=>typeof e)]; // 59 chars
-console.log(array());
+
+array = (_) => ["array", ...[!0, (_) => _, 1, {}, "s", _].map((e) => typeof e)];
+
+// console.log(array()); // 25
+
+/**
+ * task: 35
+ * Find the most common Data Type within a given array.
+
+For Example, ['1', '2', 2] should return 'string'.
+
+If there are any ties at all then just return 'We got a tie!'
+ */
+
+class CommonDatatypes {
+  
+  check(arr){
+    //Have a good one!
+    let obj ={};
+    for(let i = 0; i< arr.length; i++){
+      let type = typeof arr[i];
+      obj[type] ? obj[type]++ : obj[type] = 1;
+    }
+    let val = Object.values(obj).reduce((a,b) => a > b ? a : a = b );
+    let res = Object.keys(obj).filter(k => obj[k] === val);
+    return res.length > 1 ? 'We got a tie!' : res[0];
+  }
+}
+let common = new CommonDatatypes();
+console.log(common.check(['1', '2','3', 3,4,2])); // 'string'
