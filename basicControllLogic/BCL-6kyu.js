@@ -583,4 +583,4 @@ class CommonDatatypes {
   }
 }
 let common = new CommonDatatypes();
-console.log(common.check(['1', '2','3', 3,4,2])); // 'string'
+console.log(common.check(['1', '2','3', 3,4,2])); //
