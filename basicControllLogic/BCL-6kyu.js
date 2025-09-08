@@ -584,3 +584,100 @@ class CommonDatatypes {
 }
 let common = new CommonDatatypes();
 console.log(common.check(['1', '2','3', 3,4,2])); //
+
+/**
+ * task: 36
+We have a distribution of probability of a discrete variable (it may have only integer values):
+
+x   P(x)
+0   0.125
+1   0.375
+2   0.375
+3   0.125
+
+Total = 1.000   (The sum of the probabilities for all possible values should be 1)
+
+---------------------------------------------------------
+The mean (μ) of the values of x is:
+
+μ = 0*0.125 + 1*0.375 + 2*0.375 + 3*0.125 = 1.5
+
+---------------------------------------------------------
+The variance (σ²) is:
+
+σ² = (0 - 1.5)²*0.125 + (1 - 1.5)²*0.375 + (2 - 1.5)²*0.375 + (3 - 1.5)²*0.125
+σ² = 0.75
+
+---------------------------------------------------------
+The standard deviation (σ) is:
+
+σ = sqrt(σ²) = sqrt(0.75) = 0.8660254037844386
+
+---------------------------------------------------------
+Your task:
+Make the function stats_disc_distr() that receives a 2D array.
+Each internal array will have a pair of values: the first one is the value of the variable x,
+and the second one its corresponding probability, P(x).
+
+For the example given above:
+
+stats_disc_distr([[0, 0.125], [1, 0.375], [2, 0.375], [3, 0.125]])
+// Output: [1.5, 0.75, 0.8660254037844386]
+
+---------------------------------------------------------
+The function should also check if it is a valid distribution:
+
+1) If the sum of the probabilities is different from 1:
+   stats_disc_distr([[0, 0.425], [1, 0.375], [2, 0.375], [3, 0.125]])
+   // Output: "It's not a valid distribution"
+
+2) If one of the values of x is not an integer:
+   stats_disc_distr([[0.1, 0.425], [1.1, 0.375], [2, 0.375], [3, 0.125]])
+   // Output: "All the variable values should be integers"
+
+3) If the distribution has both problems:
+   stats_disc_distr([[0.1, 0.425], [1.1, 0.375], [2, 0.375], [3, 0.125]])
+   // Output: "It's not a valid distribution and furthermore, one or more variable value are not integers"
+
+4) If a value is a float with decimal part equal to 0 (like 1.0, 2.0), it is accepted:
+   stats_disc_distr([[0.0, 0.125], [1.0, 0.375], [2.0, 0.375], [3, 0.125]])
+   // Output: [1.5, 0.75, 0.8660254037844386]
+
+---------------------------------------------------------
+Enjoy it!
+
+ * 
+ */
+function stats_disc_distr(arr) {
+  // Check if all x are integers (allow float with .0)
+  const notIntegers = arr.some(([x, _]) => !Number.isInteger(x));
+  const allIntegersOrZeroDecimal = arr.every(([x, _]) => Number.isInteger(x) || x % 1 === 0);
+
+  // Sum of probabilities
+  const probSum = arr.reduce((acc, [_, p]) => acc + p, 0);
+
+  // Check distribution validity
+  const validDistribution = Math.abs(probSum - 1) < 1e-9; // allow floating point tolerance
+
+  // Handle errors
+  if (!validDistribution && !allIntegersOrZeroDecimal) {
+    return "It's not a valid distribution and furthermore, one or more variable value are not integers";
+  }
+  if (!validDistribution) {
+    return "It's not a valid distribution";
+  }
+  if (!allIntegersOrZeroDecimal) {
+    return "All the variable values should be integers";
+  }
+
+  // Compute mean
+  const mean = arr.reduce((acc, [x, p]) => acc + x * p, 0);
+
+  // Compute variance
+  const variance = arr.reduce((acc, [x, p]) => acc + Math.pow(x - mean, 2) * p, 0);
+
+  // Standard deviation
+  const stdDev = Math.sqrt(variance);
+
+  return [mean, variance, stdDev];
+}
