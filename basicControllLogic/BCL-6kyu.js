@@ -648,7 +648,8 @@ Enjoy it!
 
  * 
  */
-function stats_disc_distr(arr) {
+function statsDiscDistr(arr){
+ 
   // Check if all x are integers (allow float with .0)
   const notIntegers = arr.some(([x, _]) => !Number.isInteger(x));
   const allIntegersOrZeroDecimal = arr.every(([x, _]) => Number.isInteger(x) || x % 1 === 0);
