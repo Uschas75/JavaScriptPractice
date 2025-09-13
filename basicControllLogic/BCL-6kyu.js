@@ -682,3 +682,25 @@ function statsDiscDistr(arr){
 
   return [mean, variance, stdDev];
 }
+/**
+ * task 37
+ * Given 2 simultaneous equations with 2 variables, find the value of the two variables.
+
+The simultaneous equations will be handed to the function as a 2-d array, the non-zero
+ integer coefficients of the corresponding variables will be in the same order for both of the inner arrays. for example:
+
+x + 2y = 11
+
+//becomes --> [1,2,11]
+
+3x + 5y = 29
+
+//becomes --> [3,5,29]
+
+Your function must return a 1-d array containing the values of the two variables in 
+the order in which they were given in the argument. Solutions of all equations are integers. For the example above:
+
+//should return an array in the form [x,y]
+
+--> [3,4]
+ */
