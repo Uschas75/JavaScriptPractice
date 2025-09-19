@@ -587,64 +587,145 @@ console.log(common.check(['1', '2','3', 3,4,2])); //
 
 /**
  * task: 36
-We have a distribution of probability of a discrete variable (it may have only integer values):
+1. What is being asked?
 
-x   P(x)
-0   0.125
-1   0.375
-2   0.375
-3   0.125
+You need to write a function in JavaScript called stats_disc_distr().
 
-Total = 1.000   (The sum of the probabilities for all possible values should be 1)
+Input: A 2D array (an array of arrays).
 
----------------------------------------------------------
-The mean (μ) of the values of x is:
+Each inner array has two numbers:
 
-μ = 0*0.125 + 1*0.375 + 2*0.375 + 3*0.125 = 1.5
+The first number = a possible value of the random variable 
+𝑥
+x.
 
----------------------------------------------------------
-The variance (σ²) is:
+The second number = the probability of that value 
+𝑃
+(
+𝑥
+)
+P(x).
 
-σ² = (0 - 1.5)²*0.125 + (1 - 1.5)²*0.375 + (2 - 1.5)²*0.375 + (3 - 1.5)²*0.125
-σ² = 0.75
+Output: Either
 
----------------------------------------------------------
-The standard deviation (σ) is:
+An array [mean, variance, standard deviation] if the distribution is valid, OR
 
-σ = sqrt(σ²) = sqrt(0.75) = 0.8660254037844386
+An error message string if something is wrong with the distribution.
 
----------------------------------------------------------
-Your task:
-Make the function stats_disc_distr() that receives a 2D array.
-Each internal array will have a pair of values: the first one is the value of the variable x,
-and the second one its corresponding probability, P(x).
+2. What is a probability distribution?
 
-For the example given above:
+A probability distribution tells us the chance of each possible value of a variable.
 
-stats_disc_distr([[0, 0.125], [1, 0.375], [2, 0.375], [3, 0.125]])
-// Output: [1.5, 0.75, 0.8660254037844386]
+For a discrete distribution, the variable can only take certain integer values (like 0, 1, 2, 3…).
 
----------------------------------------------------------
-The function should also check if it is a valid distribution:
+Example:
 
-1) If the sum of the probabilities is different from 1:
-   stats_disc_distr([[0, 0.425], [1, 0.375], [2, 0.375], [3, 0.125]])
-   // Output: "It's not a valid distribution"
+x       P(x)
+0       0.125
+1       0.375
+2       0.375
+3       0.125
 
-2) If one of the values of x is not an integer:
-   stats_disc_distr([[0.1, 0.425], [1.1, 0.375], [2, 0.375], [3, 0.125]])
-   // Output: "All the variable values should be integers"
 
-3) If the distribution has both problems:
-   stats_disc_distr([[0.1, 0.425], [1.1, 0.375], [2, 0.375], [3, 0.125]])
-   // Output: "It's not a valid distribution and furthermore, one or more variable value are not integers"
+𝑃
+(
+0
+)
+=
+0.125
+P(0)=0.125 means the chance that 
+𝑥
+=
+0
+x=0 is 12.5%.
 
-4) If a value is a float with decimal part equal to 0 (like 1.0, 2.0), it is accepted:
-   stats_disc_distr([[0.0, 0.125], [1.0, 0.375], [2.0, 0.375], [3, 0.125]])
-   // Output: [1.5, 0.75, 0.8660254037844386]
+𝑃
+(
+1
+)
+=
+0.375
+P(1)=0.375 means the chance that 
+𝑥
+=
+1
+x=1 is 37.5%.
 
----------------------------------------------------------
-Enjoy it!
+And so on.
+
+The total probability must always equal 1.
+
+3. What should the function calculate?
+
+Mean (μ):
+The average value you’d expect if you ran the experiment many times.
+
+𝜇
+=
+∑
+(
+𝑥
+⋅
+𝑃
+(
+𝑥
+)
+)
+μ=∑(x⋅P(x))
+
+Variance (σ²):
+How spread out the values are around the mean.
+
+𝜎
+2
+=
+∑
+(
+(
+𝑥
+−
+𝜇
+)
+2
+⋅
+𝑃
+(
+𝑥
+)
+)
+σ
+2
+=∑((x−μ)
+2
+⋅P(x))
+
+Standard deviation (σ):
+The square root of the variance.
+
+𝜎
+=
+𝜎
+2
+σ=
+σ
+2
+	​
+
+4. What rules must the function check?
+
+Probabilities must add up to 1.
+
+If not → "It's not a valid distribution".
+
+x values must be integers (0, 1, 2, -1, 5, etc.).
+
+If not → "All the variable values should be integers".
+
+Exception: floats like 1.0 are fine (since they are still whole numbers).
+
+If both problems happen at once:
+
+Return → "It's not a valid distribution and furthermore, one or more variable value are not integers".
 
  * 
  */
