@@ -624,11 +624,11 @@ function statsDiscDistr(arr){
   return [mean, variance, stdDev];
 }
 /**
- * task 37
- * Given 2 simultaneous equations with 2 variables, find the value of the two variables.
+  * console.log(statsDiscDistr([[1, 0.2], [2, 0.5], [3, 0.3]])); // [2.1, 0.49, 0.7]
+  * Given 2 simultaneous equations with 2 variables, find the value of the two variables.
 
-The simultaneous equations will be handed to the function as a 2-d array, the non-zero
- integer coefficients of the corresponding variables will be in the same order for both of the inner arrays. for example:
+The simultaneous equations will be handed to the function as a 2-d array, the non-zero 
+integer coefficients of the corresponding variables will be in the same order for both of the inner arrays. for example:
 
 x + 2y = 11
 
@@ -644,4 +644,4 @@ the order in which they were given in the argument. Solutions of all equations a
 //should return an array in the form [x,y]
 
 --> [3,4]
- */
+  * */
