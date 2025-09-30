@@ -554,7 +554,6 @@ Coding Limitation:
 Less than 60 characters
  */
 
-
 array = (_) => ["array", ...[!0, (_) => _, 1, {}, "s", _].map((e) => typeof e)];
 
 // console.log(array()); // 25
@@ -569,31 +568,31 @@ If there are any ties at all then just return 'We got a tie!'
  */
 
 class CommonDatatypes {
-  
-  check(arr){
+  check(arr) {
     //Have a good one!
-    let obj ={};
-    for(let i = 0; i< arr.length; i++){
+    let obj = {};
+    for (let i = 0; i < arr.length; i++) {
       let type = typeof arr[i];
-      obj[type] ? obj[type]++ : obj[type] = 1;
+      obj[type] ? obj[type]++ : (obj[type] = 1);
     }
-    let val = Object.values(obj).reduce((a,b) => a > b ? a : a = b );
-    let res = Object.keys(obj).filter(k => obj[k] === val);
-    return res.length > 1 ? 'We got a tie!' : res[0];
+    let val = Object.values(obj).reduce((a, b) => (a > b ? a : (a = b)));
+    let res = Object.keys(obj).filter((k) => obj[k] === val);
+    return res.length > 1 ? "We got a tie!" : res[0];
   }
 }
 let common = new CommonDatatypes();
-console.log(common.check(['1', '2','3', 3,4,2])); //
+console.log(common.check(["1", "2", "3", 3, 4, 2])); //
 
 /**
-  * task: 36
- * 
+ * task: 36
+ *
  */
-function statsDiscDistr(arr){
- 
+function statsDiscDistr(arr) {
   // Check if all x are integers (allow float with .0)
   const notIntegers = arr.some(([x, _]) => !Number.isInteger(x));
-  const allIntegersOrZeroDecimal = arr.every(([x, _]) => Number.isInteger(x) || x % 1 === 0);
+  const allIntegersOrZeroDecimal = arr.every(
+    ([x, _]) => Number.isInteger(x) || x % 1 === 0
+  );
 
   // Sum of probabilities
   const probSum = arr.reduce((acc, [_, p]) => acc + p, 0);
@@ -616,7 +615,10 @@ function statsDiscDistr(arr){
   const mean = arr.reduce((acc, [x, p]) => acc + x * p, 0);
 
   // Compute variance
-  const variance = arr.reduce((acc, [x, p]) => acc + Math.pow(x - mean, 2) * p, 0);
+  const variance = arr.reduce(
+    (acc, [x, p]) => acc + Math.pow(x - mean, 2) * p,
+    0
+  );
 
   // Standard deviation
   const stdDev = Math.sqrt(variance);
@@ -624,6 +626,7 @@ function statsDiscDistr(arr){
   return [mean, variance, stdDev];
 }
 /**
+ * task:37
   * console.log(statsDiscDistr([[1, 0.2], [2, 0.5], [3, 0.3]])); // [2.1, 0.49, 0.7]
   * Given 2 simultaneous equations with 2 variables, find the value of the two variables.
 
@@ -645,3 +648,17 @@ the order in which they were given in the argument. Solutions of all equations a
 
 --> [3,4]
   * */
+
+function solveSimultaneous(array) {
+  const [[a1, b1, c1], [a2, b2, c2]] = array;
+  const divisor = a1 / a2;
+  const y = (c1 - c2 * divisor) / (b1 - b2 * divisor);
+  const x = (c1 - b1 * y) / a1;
+  return [Math.round(x), Math.round(y)];
+}
+console.log(
+  solveSimultaneous([
+    [1, 2, 11],
+    [3, 5, 29],
+  ])
+); // [3,4]
