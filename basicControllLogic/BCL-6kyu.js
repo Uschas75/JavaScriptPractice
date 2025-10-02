@@ -656,12 +656,12 @@ function solveSimultaneous(array) {
   const x = (c1 - b1 * y) / a1;
   return [Math.round(x), Math.round(y)];
 }
-console.log(
-  solveSimultaneous([
-    [1, 2, 11],
-    [3, 5, 29],
-  ])
-); // [3,4]
+// console.log(
+//   solveSimultaneous([
+//     [1, 2, 11],
+//     [3, 5, 29],
+//   ])
+// ); // [3,4]
 
 /**
  * task: 38
@@ -694,3 +694,52 @@ function Custom(){}
 type(new Custom()) --> 'Custom'
 Related reading: MDN's page for Object.prototype.toString and Object.prototype.constructor.
  */
+
+function type(val) {
+  let result = Object.prototype.toString.call(val).slice(8, -1);
+  if (Number.isNaN(val)) {
+    return "Number NaN";
+  } else if (Number(val) && typeof val === "string") {
+    return "String Numeric";
+  } else if (Number.isInteger(val)) {
+    return "Number Integer";
+  } else if (
+    !Number.isInteger(val) &&
+    typeof val === "number" &&
+    isFinite(val)
+  ) {
+    return "Number Float";
+  } else if (isFinite(val) === false && typeof val === "number") {
+    return "Number Infinite";
+  } else if (val === null) {
+    return "Null";
+  } else if (val === undefined) {
+    return "Undefined";
+  } else if (val instanceof RegExp) {
+    return "RegExp";
+  } else if (val instanceof Array) {
+    return "Array";
+  } 
+   if (typeof val === "object") {
+    // get constructor name if available
+   
+    const constructorName = val.constructor && val.constructor.name ? val.constructor.name : "Custom";
+    return `${constructorName}`;
+  }
+
+  return result[0].toUpperCase() + result.substring(1);
+}
+console.log(type([1, 2, 3])); // 'Array'
+console.log(type(NaN)); // 'Number NaN'
+console.log(type("123")); // 'String Numeric'
+console.log(type(1.1)); // 'Number Float'
+console.log(type(null)); // 'Null'
+console.log(type(undefined)); // 'Undefined'
+console.log(type(function () {})); // 'Function'
+console.log(type({ snap: "crackle" })); // 'Object'
+console.log(type(/abc/));
+// 'RegExp'
+console.log(type(true)); // 'Boolean'
+console.log(type(1)); // 'Number Integer'
+
+console.log(type(new (function Custom() {})())); // 'Custom'
