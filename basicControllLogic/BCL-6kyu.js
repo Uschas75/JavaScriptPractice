@@ -719,30 +719,31 @@ function type(val) {
     return "RegExp";
   } else if (val instanceof Array) {
     return "Array";
-  } 
-   if (typeof val === "object") {
+  }
+  if (typeof val === "object") {
     // get constructor name if available
-   
-    const constructorName = val.constructor && val.constructor.name ? val.constructor.name : "Custom";
+
+    const constructorName =
+      val.constructor && val.constructor.name ? val.constructor.name : "Custom";
     return `${constructorName}`;
   }
 
   return result[0].toUpperCase() + result.substring(1);
 }
-console.log(type([1, 2, 3])); // 'Array'
-console.log(type(NaN)); // 'Number NaN'
-console.log(type("123")); // 'String Numeric'
-console.log(type(1.1)); // 'Number Float'
-console.log(type(null)); // 'Null'
-console.log(type(undefined)); // 'Undefined'
-console.log(type(function () {})); // 'Function'
-console.log(type({ snap: "crackle" })); // 'Object'
-console.log(type(/abc/));
-// 'RegExp'
-console.log(type(true)); // 'Boolean'
-console.log(type(1)); // 'Number Integer'
+// console.log(type([1, 2, 3])); // 'Array'
+// console.log(type(NaN)); // 'Number NaN'
+// console.log(type("123")); // 'String Numeric'
+// console.log(type(1.1)); // 'Number Float'
+// console.log(type(null)); // 'Null'
+// console.log(type(undefined)); // 'Undefined'
+// console.log(type(function () {})); // 'Function'
+// console.log(type({ snap: "crackle" })); // 'Object'
+// console.log(type(/abc/));
+// // 'RegExp'
+// console.log(type(true)); // 'Boolean'
+// console.log(type(1)); // 'Number Integer'
 
-console.log(type(new (function Custom() {})())); // 'Custom'
+// console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
  task: 39
@@ -761,4 +762,151 @@ in some cases there may be only a loop, with no dangling piece
 Thanks to shadchnev, I broke all of the methods from the Hash class.
 
 Don't miss dmitry's article in the discussion after you pass the Kata !! 
+// Codewars expects a function named `loop_size`
+ */
+
+/**
+ * task: 39- step 1
+ * tep 1: Understand the Node
+
+Concept: A linked list is made of nodes, where each node stores data and a reference (pointer) to the next node.
+
+Exercise 1:
+Define a class Node with two attributes: data and next.
+Create a node with some data and print its values.
+Question: Create a node with the value 10. What is its next value?
+ * 
+ */
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+let node = new Node(10);
+console.log(node.data);
+
+/**
+ * task: 39- step 2
+Step 2: Create a Simple Linked List
+
+Concept: A linked list starts with a head that points to the first node.
+
+Exercise 2:
+
+Define a class LinkedList with an attribute head.
+
+Add a method print_list() to print all node values.
+
+Question: Create a linked list and add three nodes with values 10, 20, 30. Print the list.
+
+
+ * 
+ */
+
+class LinkedList {
+  constructor(data) {
+    this.head = new Node(data);
+  }
+  print_list() {
+    let current = this.head;
+    while (current) {
+      console.log(current.data);
+      current = current.next;
+    }
+  }
+}
+let list10 = new LinkedList(10);
+let list = new LinkedList(20);
+let listC = new LinkedList(30);
+
+/**
+ * task: 39- step 3
+
+
+Step 3: Insert Nodes
+
+Concept: Nodes can be inserted at the beginning, end, or specific position.
+Exercise 3:
+
+Add methods to insert:
+
+At the beginning
+
+At the end
+
+At a specific position
+Question:
+Insert 5 at the beginning of your linked list. Print the list.
+
+Insert 40 at the end. Print the list.
+
+Insert 25 at position 3. Print the list.
+ * 
+ */
+
+/**
+ * task: 39- step 4
+
+
+Step 4: Delete Nodes
+
+Concept: Deleting nodes requires changing pointers to remove references.
+
+Exercise 4:
+
+Add methods to delete a node by value or position.
+
+Questions:
+
+Delete node with value 20. Print the list.
+
+Delete node at position 2. Print the list.
+ * 
+ */
+
+/**
+ * task: 39- step 5
+
+
+
+Step 5: Search & Length
+
+Concept: You can search for a value or count nodes.
+
+Exercise 5:
+
+Add methods:
+
+search(value) → returns True/False
+
+length() → returns number of nodes
+
+Questions:
+
+Search for 25 in your list.
+
+Find the length of your linked list.
+ */
+
+/**
+ * task: 39- step 5
+
+
+
+Step 6: Advanced Operations
+
+Concept: Now you can implement more advanced stuff:
+
+Reverse the linked list
+
+Detect a cycle
+
+Merge two linked lists
+
+Questions:
+
+Reverse your linked list and print it.
+
+Create another linked list with nodes 100, 200. Merge it with your first list. Print the final list.
  */
