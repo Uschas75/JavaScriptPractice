@@ -804,21 +804,8 @@ Question: Create a linked list and add three nodes with values 10, 20, 30. Print
  * 
  */
 
-class LinkedList {
-  constructor(data) {
-    this.head = new Node(data);
-  }
-  print_list() {
-    let current = this.head;
-    while (current) {
-      console.log(current.data);
-      current = current.next;
-    }
-  }
-}
-let list10 = new LinkedList(10);
-let list = new LinkedList(20);
-let listC = new LinkedList(30);
+
+// list.print_list(); // null
 
 /**
  * task: 39- step 3
@@ -845,6 +832,35 @@ Insert 25 at position 3. Print the list.
  * 
  */
 
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+  print_list(){
+    let current = this.head;
+    let result = "";
+    while (current) {
+     result += current.data + "->";
+     current = current.next;
+    }
+  console.log(result + "null");
+  }
+
+ 
+}
+
+
+
+const list = new LinkedList();
+list.head = new Node(10);
+
+list.head.next = 20;
+list.head.next = new Node(20);
+list.head.next.next = new Node(30);
+
+
+
+console.log(list.head);
 /**
  * task: 39- step 4
 
