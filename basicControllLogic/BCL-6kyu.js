@@ -860,7 +860,7 @@ list.head.next.next = new Node(30);
 
 
 
-console.log(list.head);
+console.log(list.print_list()); // 10->20->30->null
 /**
  * task: 39- step 4
 
