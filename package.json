@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
  "scripts": {
-    "start": "node \"basicControllLogic/BCL-6kyu\""
+    "start": "node \"basicControllLogic/BCL-5kyu\""
   },
   "author": "",
   "license": "ISC",
