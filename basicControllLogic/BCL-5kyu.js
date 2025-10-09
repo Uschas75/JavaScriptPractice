@@ -1,4 +1,3 @@
-
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
@@ -40,28 +39,64 @@ class Node {
   }
 }
 let node = new Node(10);
-console.log(node.data);
 
 /**
  * task: 39- step 2
 Step 2: Create a Simple Linked List
-
 Concept: A linked list starts with a head that points to the first node.
-
 Exercise 2:
-
 Define a class LinkedList with an attribute head.
-
 Add a method print_list() to print all node values.
-
 Question: Create a linked list and add three nodes with values 10, 20, 30. Print the list.
 
 
  * 
  */
+class TestLinkedList {
+  constructor() {
+    this.head = null; // this is the initialization of the linked list. it will contain the first node (value and point to next node)
+  }
+  insertAtBeginning(data) {
+    let newNode = new Node(data);
 
+    newNode.next = this.head;
+    this.head = newNode;
+    // console.log(this.head);
+  }
+  printList(data) {
+    console.log(!this.head.next);
+    let newNode = new Node(data);
+    let current = newNode;
+    let x = 1;
+    let result = " ";
+    if (!this.head.next) {
+      result += this.head.data;
+      // console.log(result);
+      this.head.next = current;
+      console.log(this.head.next);
+    }
+    while (current) {
+      console.log("dhukse");
+      current = current.next;
+    }
 
-// list.print_list(); // null
+    return result + "null";
+  }
+}
+
+let testLinkedList_A = new TestLinkedList();
+console.log("at the begin)");
+testLinkedList_A.insertAtBeginning(85);
+console.log("print list 90");
+testLinkedList_A.printList(90);
+console.log("print list 770");
+testLinkedList_A.printList(770);
+console.log("print list 9780");
+testLinkedList_A.printList(9780);
+console.log("print list 912540");
+testLinkedList_A.printList(912540);
+
+console.log(testLinkedList_A);
 
 /**
  * task: 39- step 3
@@ -87,93 +122,6 @@ Insert 40 at the end. Print the list.
 Insert 25 at position 3. Print the list.
  * 
  */
-
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-  }
-
-  // Insert at the beginning
-  insertAtBeginning(data) {
-    const newNode = new Node(data);
-    newNode.next = this.head;
-    this.head = newNode;
-  }
-
-  // Insert at the end
-  insertAtEnd(data) {
-    const newNode = new Node(data);
-    if (!this.head) {
-      this.head = newNode;
-      return;
-    }
-    let current = this.head;
-    while (current.next) {
-      current = current.next;
-    }
-    current.next = newNode;
-  }
-
-  // Insert at a specific position
-  insertAtPosition(position, data) {
-    if (position < 1) {
-      console.log("Invalid position");
-      return;
-    }
-    if (position === 1) {
-      this.insertAtBeginning(data);
-      return;
-    }
-
-    const newNode = new Node(data);
-    let current = this.head;
-    let count = 1;
-
-    while (current && count < position - 1) {
-      current = current.next;
-      count++;
-    }
-
-    if (!current) {
-      console.log("Position out of range");
-      return;
-    }
-
-    newNode.next = current.next;
-    current.next = newNode;
-  }
-
-  // Print the linked list
-  printList() {
-    let current = this.head;
-    let result = "";
-    while (current) {
-      result += current.data + " -> ";
-      current = current.next;
-    }
-    result += "null";
-    console.log(result);
-  }
-}
-
-// Example usage
-const list = new LinkedList();
-
-// Insert 5 at the beginning
-list.insertAtBeginning(5);
-console.log("After inserting 5 at the beginning:");
-list.printList();
-
-// Insert 40 at the end
-list.insertAtEnd(40);
-console.log("After inserting 40 at the end:");
-list.printList();
-
-// Insert 25 at position 3
-list.insertAtPosition(3, 25);
-console.log("After inserting 25 at position 3:");
-list.printList();
 
 // 10->20->30->null
 /**
