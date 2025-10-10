@@ -64,22 +64,16 @@ class TestLinkedList {
     // console.log(this.head);
   }
   printList(data) {
-    console.log(!this.head.next);
     let newNode = new Node(data);
     let current = newNode;
-    let x = 1;
-    let result = " ";
+    let result;
     if (!this.head.next) {
       result += this.head.data;
-      // console.log(result);
       this.head.next = current;
       console.log(this.head.next);
     }
-    while (current) {
-      console.log("dhukse");
-      current = current.next;
-    }
-
+    current.next = current;
+    console.log(current);
     return result + "null";
   }
 }
