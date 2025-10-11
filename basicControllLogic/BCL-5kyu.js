@@ -52,43 +52,79 @@ Question: Create a linked list and add three nodes with values 10, 20, 30. Print
 
  * 
  */
-class TestLinkedList {
-  constructor() {
-    this.head = null; // this is the initialization of the linked list. it will contain the first node (value and point to next node)
-  }
-  insertAtBeginning(data) {
-    let newNode = new Node(data);
-
-    newNode.next = this.head;
-    this.head = newNode;
-    // console.log(this.head);
-  }
-  printList(data) {
-    let newNode = new Node(data);
-    let current = newNode;
-    let result;
-    if (!this.head.next) {
-      result += this.head.data;
-      this.head.next = current;
-      console.log(this.head.next);
-    }
-    current.next = current;
-    console.log(current);
-    return result + "null";
+// Define Node class first
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
   }
 }
 
+// Define LinkedList class
+class TestLinkedList {
+  constructor() {
+    this.head = null; // Points to the first node
+  }
+
+  // Insert node at the beginning
+  insertAtBeginning(data) {
+    let newNode = new Node(data);
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  // Insert node at the end (this is what you wanted to do)
+  insertAtEnd(data) {
+    let newNode = new Node(data);
+
+    if (!this.head) {
+      // If list is empty, the new node becomes head
+      this.head = newNode;
+      return;
+    }
+
+    // Otherwise, find the last node
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+
+    // Add new node at the end
+    current.next = newNode;
+  }
+
+  // Print the entire linked list
+  printList() {
+    let current = this.head;
+    let result = "";
+
+    while (current) {
+      result += current.data + " -> ";
+      current = current.next;
+    }
+    result += "null";
+    console.log(result);
+  }
+}
+
+// ✅ Test the class
 let testLinkedList_A = new TestLinkedList();
-console.log("at the begin)");
+
+console.log("Insert at beginning:");
 testLinkedList_A.insertAtBeginning(85);
-console.log("print list 90");
-testLinkedList_A.printList(90);
-console.log("print list 770");
-testLinkedList_A.printList(770);
-console.log("print list 9780");
-testLinkedList_A.printList(9780);
-console.log("print list 912540");
-testLinkedList_A.printList(912540);
+
+console.log("Insert 90 at end:");
+testLinkedList_A.insertAtEnd(90);
+
+console.log("Insert 770 at end:");
+testLinkedList_A.insertAtEnd(770);
+
+console.log("Print linked list:");
+testLinkedList_A.printList();
+
+console.log(testLinkedList_A);
+
+
 
 console.log(testLinkedList_A);
 
