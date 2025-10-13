@@ -32,13 +32,6 @@ Create a node with some data and print its values.
 Question: Create a node with the value 10. What is its next value?
  * 
  */
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
-}
-let node = new Node(10);
 
 /**
  * task: 39- step 2
@@ -52,6 +45,8 @@ Question: Create a linked list and add three nodes with values 10, 20, 30. Print
 
  * 
  */
+// Define Node class first
+
 // Define Node class first
 class Node {
   constructor(data) {
@@ -77,56 +72,62 @@ class TestLinkedList {
   insertAtEnd(data) {
     let newNode = new Node(data);
 
+    let current = this.head;
+    
     if (!this.head) {
-      // If list is empty, the new node becomes head
       this.head = newNode;
       return;
     }
-
-    // Otherwise, find the last node
-    let current = this.head;
-    while (current.next) {
+    while(current.next){
       current = current.next;
     }
-
-    // Add new node at the end
+    
     current.next = newNode;
-  }
-
-  // Print the entire linked list
-  printList() {
-    let current = this.head;
-    let result = "";
-
-    while (current) {
-      result += current.data + " -> ";
-      current = current.next;
-    }
-    result += "null";
-    console.log(result);
+    return this.head;
   }
 }
 
-// ✅ Test the class
-let testLinkedList_A = new TestLinkedList();
+// // ✅ Test the class
+// let testLinkedList_A = new TestLinkedList();
 
-console.log("Insert at beginning:");
-testLinkedList_A.insertAtBeginning(85);
+// console.log("Insert at beginning:");
+// testLinkedList_A.insertAtBeginning(85);
 
-console.log("Insert 90 at end:");
-testLinkedList_A.insertAtEnd(90);
+// console.log("Insert 90 at end:");
+// testLinkedList_A.insertAtEnd(90);
 
-console.log("Insert 770 at end:");
-testLinkedList_A.insertAtEnd(770);
+// console.log("Insert 770 at end:");
+// testLinkedList_A.insertAtEnd(770);
+// testLinkedList_A.insertAtEnd(870);
+// testLinkedList_A.insertAtEnd(98570);
 
-console.log("Print linked list:");
-testLinkedList_A.printList();
+// // console.log("Print linked list:");
+// // testLinkedList_A.printList();
+// // console.log(testLinkedList_A.head);
 
-console.log(testLinkedList_A);
+// // console.dir(testLinkedList_A, { depth: null });
 
 
 
-console.log(testLinkedList_A);
+class LinkedList{
+  constructor(){
+    this.head = null;
+  }
+  prepend(data){
+    let newNode = new Node(data);
+    newNode.next = this.head;
+
+  }
+}
+
+let ll = new LinkedList();
+ll.prepend(10);
+ll.prepend(20);
+ll.prepend(30);
+console.log(ll.head); // 30 -> 20 -> 10 -> null
+
+
+
 
 /**
  * task: 39- step 3
