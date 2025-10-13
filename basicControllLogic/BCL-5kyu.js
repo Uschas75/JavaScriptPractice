@@ -73,15 +73,15 @@ class TestLinkedList {
     let newNode = new Node(data);
 
     let current = this.head;
-    
+
     if (!this.head) {
       this.head = newNode;
       return;
     }
-    while(current.next){
+    while (current.next) {
       current = current.next;
     }
-    
+
     current.next = newNode;
     return this.head;
   }
@@ -107,27 +107,55 @@ class TestLinkedList {
 
 // // console.dir(testLinkedList_A, { depth: null });
 
-
-
-class LinkedList{
-  constructor(){
+class LinkedList {
+  constructor() {
     this.head = null;
   }
-  prepend(data){
+  atTheBegining(data) {
     let newNode = new Node(data);
     newNode.next = this.head;
 
+    this.head = newNode; // the head always changes to the new node and the previous data  which was the head at
+    // certain point of times becomes the next of the new node
+  }
+  atTheLast(data) {
+    const newNode = new Node(data);
+    console.log(`--- Adding ${data} ---`);
+
+    if (!this.head) {
+      this.head = newNode;
+      console.log("List was empty, set as head");
+      return;
+    }
+
+    let current = this.head;
+    console.log(`Starting at head: ${current.data}`);
+
+    let steps = 0;
+    while (current.next) {
+      current = current.next;
+      steps++;
+      console.log(`Step ${steps}: Moved to node with data: ${current.data}`);
+    }
+
+    console.log(`Reached end at node: ${current.data}`);
+    current.next = newNode;
+    console.log(`Added ${data} after ${current.data}`);
   }
 }
 
 let ll = new LinkedList();
-ll.prepend(10);
-ll.prepend(20);
-ll.prepend(30);
-console.log(ll.head); // 30 -> 20 -> 10 -> null
-
-
-
+// ll.atTheBegining(10);
+// ll.atTheBegining(20);
+// ll.atTheBegining(30);
+ll.atTheLast(40);
+ll.atTheLast(50);
+ll.atTheLast(60);
+ll.atTheLast(70);
+// ll.atTheLast(80);
+// ll.atTheLast(90);
+// ll.atTheLast(100);
+console.dir(ll.head, { depth: null }); // 30 -> 20 -> 10 -> nu
 
 /**
  * task: 39- step 3
