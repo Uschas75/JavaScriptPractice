@@ -145,106 +145,15 @@ class LinkedList {
 }
 
 let ll = new LinkedList();
-// ll.atTheBegining(10);
-// ll.atTheBegining(20);
-// ll.atTheBegining(30);
+ll.atTheBegining(10);
+ll.atTheBegining(20);
+ll.atTheBegining(30);
 ll.atTheLast(40);
 ll.atTheLast(50);
 ll.atTheLast(60);
 ll.atTheLast(70);
-// ll.atTheLast(80);
-// ll.atTheLast(90);
-// ll.atTheLast(100);
+ll.atTheLast(80);
+ll.atTheLast(90);
+ll.atTheLast(100);
 console.dir(ll.head, { depth: null }); // 30 -> 20 -> 10 -> nu
 
-/**
- * task: 39- step 3
-
-
-Step 3: Insert Nodes
-
-Concept: Nodes can be inserted at the beginning, end, or specific position.
-Exercise 3:
-
-Add methods to insert:
-
-At the beginning
-
-At the end
-
-At a specific position
-Question:
-Insert 5 at the beginning of your linked list. Print the list.
-
-Insert 40 at the end. Print the list.
-
-Insert 25 at position 3. Print the list.
- * 
- */
-
-// 10->20->30->null
-/**
- * task: 39- step 4
-
-
-Step 4: Delete Nodes
-
-Concept: Deleting nodes requires changing pointers to remove references.
-
-Exercise 4:
-
-Add methods to delete a node by value or position.
-
-Questions:
-
-Delete node with value 20. Print the list.
-
-Delete node at position 2. Print the list.
- * 
- */
-
-/**
- * task: 39- step 5
-
-
-
-Step 5: Search & Length
-
-Concept: You can search for a value or count nodes.
-
-Exercise 5:
-
-Add methods:
-
-search(value) → returns True/False
-
-length() → returns number of nodes
-
-Questions:
-
-Search for 25 in your list.
-
-Find the length of your linked list.
- */
-
-/**
- * task: 39- step 5
-
-
-
-Step 6: Advanced Operations
-
-Concept: Now you can implement more advanced stuff:
-
-Reverse the linked list
-
-Detect a cycle
-
-Merge two linked lists
-
-Questions:
-
-Reverse your linked list and print it.
-
-Create another linked list with nodes 100, 200. Merge it with your first list. Print the final list.
- */
