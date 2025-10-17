@@ -120,34 +120,52 @@ class LinkedList {
   }
   atTheLast(data) {
     const newNode = new Node(data);
-    console.log(`--- Adding ${data} ---`);
+    // console.log(`--- Adding ${data} ---`);
 
     if (!this.head) {
       this.head = newNode;
-      console.log("List was empty, set as head");
+      // console.log("List was empty, set as head");
       return;
     }
 
     let current = this.head;
-    console.log(`Starting at head: ${current.data}`);
+    // console.log(`Starting at head: ${current.data}`);
 
     let steps = 0;
     while (current.next) {
       current = current.next;
       steps++;
-      console.log(`Step ${steps}: Moved to node with data: ${current.data}`);
+      // console.log(`Step ${steps}: Moved to node with data: ${current.data}`);
     }
 
-    console.log(`Reached end at node: ${current.data}`);
+    // console.log(`Reached end at node: ${current.data}`);
     current.next = newNode;
-    console.log(`Added ${data} after ${current.data}`);
+    // console.log(`Added ${data} after ${current.data}`);
+  }
+
+  /**
+   * Given the head of a singly linked list, return the middle node. If there are two middle nodes, return the second middle node.
+   */
+
+  middleNode() {
+    {
+      let nodeCount = 0;
+      let current = this.head;
+      while (current) {
+        nodeCount++;
+        current = current.next;
+      }
+      let middleNode = nodeCount / 2;
+      if (Number.isInteger(middleNode)) {
+        return middleNode;
+      }
+    }
   }
 }
-
 let ll = new LinkedList();
 ll.atTheBegining(10);
 ll.atTheBegining(20);
-ll.atTheBegining(30);
+// ll.atTheBegining(30);
 ll.atTheLast(40);
 ll.atTheLast(50);
 ll.atTheLast(60);
@@ -155,5 +173,5 @@ ll.atTheLast(70);
 ll.atTheLast(80);
 ll.atTheLast(90);
 ll.atTheLast(100);
-console.dir(ll.head, { depth: null }); // 30 -> 20 -> 10 -> nu
-
+console.dir(ll, { depth: null }); // 30 -> 20 -> 10 -> null
+console.log("Middle Node Data:", ll.middleNode()); // Should print 50
