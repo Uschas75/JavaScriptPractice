@@ -155,9 +155,21 @@ class LinkedList {
         nodeCount++;
         current = current.next;
       }
+      current = this.head;
       let middleNode = nodeCount / 2;
-      if (Number.isInteger(middleNode)) {
-        return middleNode;
+      let count = 1;
+
+      while (current && count < middleNode) {
+        count++;
+        current = current.next;
+      }
+
+      if (nodeCount % 2 !== 0) {
+        console.log(nodeCount, middleNode);
+        return current.data;
+      } else{
+        console.log(nodeCount, middleNode);
+        return [current.next.data, current.data];
       }
     }
   }
@@ -165,11 +177,11 @@ class LinkedList {
 let ll = new LinkedList();
 ll.atTheBegining(10);
 ll.atTheBegining(20);
-// ll.atTheBegining(30);
+ll.atTheBegining(30);
 ll.atTheLast(40);
 ll.atTheLast(50);
 ll.atTheLast(60);
-ll.atTheLast(70);
+// ll.atTheLast(70);
 ll.atTheLast(80);
 ll.atTheLast(90);
 ll.atTheLast(100);
