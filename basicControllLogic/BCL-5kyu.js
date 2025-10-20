@@ -167,11 +167,27 @@ class LinkedList {
       if (nodeCount % 2 !== 0) {
         console.log(nodeCount, middleNode);
         return current.data;
-      } else{
+      } else {
         console.log(nodeCount, middleNode);
         return [current.next.data, current.data];
       }
     }
+  }
+
+  loopSize() {
+    let meetingPoint = this.detectLoop();
+
+    if (!meetingPoint) return 0; // No loop
+
+    let count = 1;
+    let current = meetingPoint.next;
+
+    while (current !== meetingPoint) {
+      count++;
+      current = current.next;
+    }
+
+    return count;
   }
 }
 let ll = new LinkedList();
