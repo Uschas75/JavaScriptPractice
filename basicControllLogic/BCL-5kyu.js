@@ -173,8 +173,11 @@ class LinkedList {
       }
     }
   }
-//Given the head of a linked list and an integer val, remove all nodes that contain val and return the new head.
-
+  //Given the head of a linked list and an integer val,
+  //  remove all nodes that contain val and return the new head.
+  removeElements(head, val){
+    this.head = head;
+  }
 
 }
 let ll = new LinkedList();
@@ -184,11 +187,11 @@ ll.atTheBegining(30);
 ll.atTheLast(40);
 ll.atTheLast(50);
 ll.atTheLast(60);
-// ll.atTheLast(70);
+ll.atTheLast(70);
 ll.atTheLast(80);
 ll.atTheLast(90);
 ll.atTheLast(100);
-console.dir(ll, { depth: null }); // 30 -> 20 -> 10 -> null
-console.log("Middle Node Data:", ll.middleNode()); // Should print 50
-console.log(ll.loopSize());
-
+// console.dir(ll, { depth: null }); // 30 -> 20 -> 10 -> null
+// console.log("Middle Node Data:", ll.middleNode()); // Should print 50
+ll.removeElements(70);
+console.dir(ll, { depth: null });
