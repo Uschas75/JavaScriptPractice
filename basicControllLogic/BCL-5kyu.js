@@ -1,3 +1,57 @@
+
+//------------------------Fresh Start------------------------//
+//Simple Task: Draw a linked list with 3 nodes containing values 10, 20, 30. Label each part (data, next, head).
+
+class Node{
+  constructor(data){
+    this.data = data;
+    this.next = null;
+  }
+}
+
+let node1 = new Node(10);
+let node2 = new Node(20);
+let node3 = new Node(30);
+/**
+//manually linking nodes
+*/
+node1.next = node2;
+node2.next = node3;
+
+//Simple Task: Visiting each node from head to end.
+function traverse(head) {
+    let current = head;
+    //Simple Task: Write a function that counts how many nodes are in a linked list.
+    let count = 0;
+    let result = "";
+    while (current !== null) {
+        result += current.data + " -> ";
+        count++;
+        current = current.next;
+    }
+    result += "null";
+    console.log(count);
+    return console.log(result);
+}
+traverse(node1); // Should print 10 -> 20 -> 30 -> null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
@@ -46,6 +100,25 @@ Question: Create a linked list and add three nodes with values 10, 20, 30. Print
  * 
  */
 // Define Node class first
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Define Node class first
 class Node {
@@ -60,7 +133,7 @@ class TestLinkedList {
   constructor() {
     this.head = null; // Points to the first node
   }
-
+  
   // Insert node at the beginning
   insertAtBeginning(data) {
     let newNode = new Node(data);
@@ -73,7 +146,7 @@ class TestLinkedList {
     let newNode = new Node(data);
 
     let current = this.head;
-
+    
     if (!this.head) {
       this.head = newNode;
       return;
@@ -81,7 +154,7 @@ class TestLinkedList {
     while (current.next) {
       current = current.next;
     }
-
+    
     current.next = newNode;
     return this.head;
   }
@@ -121,35 +194,35 @@ class LinkedList {
   atTheLast(data) {
     const newNode = new Node(data);
     // console.log(`--- Adding ${data} ---`);
-
+    
     if (!this.head) {
       this.head = newNode;
-      // console.log("List was empty, set as head");
+      console.log("List was empty, set as head");
       return;
     }
-
+    
     let current = this.head;
-    // console.log(`Starting at head: ${current.data}`);
-
-    let steps = 0;
-    while (current.next) {
-      current = current.next;
-      steps++;
-      // console.log(`Step ${steps}: Moved to node with data: ${current.data}`);
+    console.log(`Starting at head: ${current.data}`);
+    
+    // let steps = 0;
+    // while (current.next) {
+      //   current = current.next;
+      //   steps++;
+      //   console.log(`Step ${steps}: Moved to node with data: ${current.data}`);
+      // }
+      
+      // console.log(`Reached end at node: ${current.data}`);
+      current.next = newNode;
+      // console.log(`Added ${data} after ${current.data}`);
     }
-
-    // console.log(`Reached end at node: ${current.data}`);
-    current.next = newNode;
-    // console.log(`Added ${data} after ${current.data}`);
-  }
-
+    
   /**
    * Given the head of a singly linked list, return the middle node. If there are two middle nodes, return the second middle node.
-   */
-
+  
+  
   middleNode() {
-    {
-      let nodeCount = 0;
+   {
+    let nodeCount = 0;
       let current = this.head;
       while (current) {
         nodeCount++;
@@ -158,40 +231,59 @@ class LinkedList {
       current = this.head;
       let middleNode = nodeCount / 2;
       let count = 1;
-
+      
       while (current && count < middleNode) {
         count++;
         current = current.next;
       }
-
+      
       if (nodeCount % 2 !== 0) {
         console.log(nodeCount, middleNode);
         return current.data;
       } else {
         console.log(nodeCount, middleNode);
-        return [current.next.data, current.data];
+      return [current.next.data, current.data];
       }
     }
   }
   //Given the head of a linked list and an integer val,
   //  remove all nodes that contain val and return the new head.
-  removeElements(head, val){
-    this.head = head;
-  }
+  removeElements(val) {
+    // console.log( this.head);
+    let dummy = new Node(0);
+    let current = this.head;
+    while(current){
+      if(current.data !== val){
+       newNode = new Node(current.data);
 
+      }
+      current = current.next;
+    }
+    // dummy.next = this.head;
+    return dummy
+  }
+  
 }
 let ll = new LinkedList();
-ll.atTheBegining(10);
-ll.atTheBegining(20);
-ll.atTheBegining(30);
+// ll.atTheBegining(10);
+// ll.atTheBegining(20);
+// ll.atTheBegining(30);
+// console.dir(ll.head, { depth: null });
 ll.atTheLast(40);
 ll.atTheLast(50);
 ll.atTheLast(60);
 ll.atTheLast(70);
-ll.atTheLast(80);
-ll.atTheLast(90);
-ll.atTheLast(100);
+// ll.atTheLast(80);
+// ll.atTheLast(90);
+// ll.atTheLast(100);
 // console.dir(ll, { depth: null }); // 30 -> 20 -> 10 -> null
 // console.log("Middle Node Data:", ll.middleNode()); // Should print 50
-ll.removeElements(70);
+// console.log("Removing elements with value 70:");
+// ll.removeElements(30);
+// console.dir(ll.removeElements(40),  { depth: null });  // remove head
 console.dir(ll, { depth: null });
+
+// console.dir(ll.removeElements, { depth: null });
+
+
+*/
