@@ -33,18 +33,62 @@ function traverse(head) {
     console.log(count);
     return console.log(result);
 }
-traverse(node1); // Should print 10 -> 20 -> 30 -> null
+
+
+
+//SimpleTask : Implement insertion at beginning
+
+function insertAtBeginning(head, data) {
+  let newNode = new Node(data);
+  
+  newNode.next = head;
+  node1 = newNode; // Update head to new node
+  return newNode;
+}
+insertAtBeginning(node1, 5);
+// insertAtBeginning(node1, 8);
+// insertAtBeginning(node1, 3);
+
+
+
+// //Simple task: Insert at end
+// function insertAtEnd(head, data) {
+//   let newNode = new Node(data);
+//   let current = head;
+//   while(current.next !== null){
+//     current = current.next;
+//   }
+//   current.next = newNode;
+//   return head;
+  
+// }
 
 
 
 
 
+function insertAtEnd(head, data) {
+    let newNode = new Node(data);
+    
+
+    
+    let current = head;
+    // Stop at the last node (where next is null)
+    while (current.next !== null) {
+        current = current.next;
+    }
+    // here, current.next is the last node's next of head. now we get the last node's next to point to newNode
+    // the reason behind running this loop to get memmory address of last node is because we don't have direct access to it.
+    //when we have access to last node, we can change its next to point to newNode
+    // here current  = current.next does not depend on others because each node and its next are independent of each other.
+    current.next = newNode;
+    return head;
+}
 
 
-
-
-
-
+console.dir(node1, {depth: null}); // New head with value 5
+console.dir( insertAtEnd(node1, 909),{depth: null});
+traverse(node1); // Output: 5 -> 8 -> 3 -> 10 -> 20 -> 30 -> 99 -> null
 
 
 
