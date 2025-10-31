@@ -85,17 +85,108 @@ function insertAtEnd(head, data) {
     return head;
 }
 
+insertAtEnd(node1, 777);
+insertAtEnd(node1, 569);
+//Insert a node after a given node
 
-console.dir(node1, {depth: null}); // New head with value 5
-console.dir( insertAtEnd(node1, 909),{depth: null});
-traverse(node1); // Output: 5 -> 8 -> 3 -> 10 -> 20 -> 30 -> 99 -> null
+function insertAfterNode(prevNode, data) {
+  if(prevNode === null){
+    console.log("The given previous node cannot be null");
+    return;
+  }
+  let newNode = new Node(data);
+  let nextNode = prevNode.next;
+  newNode.next = nextNode;
+  prevNode.next = newNode;
+  return node1;
+    
+
+}
+// console.dir(insertAfterNode(node2, 902), {depth: null}); // Insert 99 after node with value 20
 
 
+// console.dir(node1, {depth: null}); // New head with value 5
+// console.dir( insertAtEnd(node1, 909),{depth: null});
+// traverse(node1); // Output: 5 -> 8 -> 3 -> 10 -> 20 -> 30 -> 99 -> null
+
+//simple task: Delete the first node
+
+function deleteFirstNode(head) {
+  if(head === null){
+    return null;
+  }
+  node1 = head.next; // Update head to the next node
+  return node1;
+}
+
+console.dir(deleteFirstNode(node1), {depth: null}); // New head with value 8
+
+//simple task: Delete the last node 
+function deleteLastNode(head) {
+  if(head === null){
+    return null;
+  }
+  while(head.next !== null){
+    head = head.next;
+    if(head.next.next === null){
+      head.next = null;
+      break;
+
+    }
+  }
+
+  return node1;
+}
 
 
+// console.dir(deleteLastNode(node1), {depth: null}); // List without last node
+
+//simple task : Delete a node with specific value
+function deleteNodeByValue(head, value) {
+  if(head === null){
+    return null;
+  }
+  let current = head;
+  while(current.next !== null){
+    if(current.next.data === value){
+      current.next = current.next.next;
+      break;
+    }
+    current = current.next;
+  }
+  return node1;
+}
+// console.dir(deleteNodeByValue(node1, 20), {depth: null}); // List without node with value 20
 
 
+//1.2 Start with Problem 1.2 (Search Element) and solve them in the recommended order. After each problem, test with:
+function searchElement(head, key) {
+  while(head !== null){
+    if(head.data === key){
+      return true;
+    }
+    head = head.next;
+  }
+  return false;
+}
+// console.log(searchElement(node1, 20));   // true
+// console.log(searchElement(node1, 100));  // false
 
+// Problem 1.3 - Get Nth Node
+function getNthNode(head, index) {
+  let count = 0;
+  while(head !== null){
+    if(count === index){
+      return head.data;
+    }
+    head = head.next;
+    count++;
+  }
+  return null;
+}
+
+console.log(getNthNode(node1, 2)); // 20
+console.log(getNthNode(node1, 5)); // null
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
