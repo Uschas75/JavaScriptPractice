@@ -187,6 +187,11 @@ function getNthNode(head, index) {
 
 console.log(getNthNode(node1, 2)); // 20
 console.log(getNthNode(node1, 5)); // null
+
+//Problem 2.1: Insert at Position
+function insertAtPosition(head, data, position) {
+  
+}
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
