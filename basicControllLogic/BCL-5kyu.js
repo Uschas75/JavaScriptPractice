@@ -190,8 +190,19 @@ console.log(getNthNode(node1, 5)); // null
 
 //Problem 2.1: Insert at Position
 function insertAtPosition(head, data, position) {
-  
+  let newNode = new Node(data);
+  let count = 0;
+  while(head !== null){
+    if(count + 1 === position){
+      newNode.next = head.next
+      head.next = newNode;
+      return node1;
+    }
+    head= head.next;
+    count++;
+  }
 }
+console.dir(insertAtPosition(node1, 555, 2), {depth: null}); // Insert 555 at position 2
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
