@@ -1,9 +1,8 @@
-
 //------------------------Fresh Start------------------------//
 //Simple Task: Draw a linked list with 3 nodes containing values 10, 20, 30. Label each part (data, next, head).
 
-class Node{
-  constructor(data){
+class Node {
+  constructor(data) {
     this.data = data;
     this.next = null;
   }
@@ -20,36 +19,32 @@ node2.next = node3;
 
 //Simple Task: Visiting each node from head to end.
 function traverse(head) {
-    let current = head;
-    //Simple Task: Write a function that counts how many nodes are in a linked list.
-    let count = 0;
-    let result = "";
-    while (current !== null) {
-        result += current.data + " -> ";
-        count++;
-        current = current.next;
-    }
-    result += "null";
-    console.log(count);
-    return console.log(result);
+  let current = head;
+  //Simple Task: Write a function that counts how many nodes are in a linked list.
+  let count = 0;
+  let result = "";
+  while (current !== null) {
+    result += current.data + " -> ";
+    count++;
+    current = current.next;
+  }
+  result += "null";
+  console.log(count);
+  return console.log(result);
 }
-
-
 
 //SimpleTask : Implement insertion at beginning
 
 function insertAtBeginning(head, data) {
   let newNode = new Node(data);
-  
+
   newNode.next = head;
   node1 = newNode; // Update head to new node
   return newNode;
 }
-insertAtBeginning(node1, 5);
+// insertAtBeginning(node1, 5);
 // insertAtBeginning(node1, 8);
 // insertAtBeginning(node1, 3);
-
-
 
 // //Simple task: Insert at end
 // function insertAtEnd(head, data) {
@@ -60,37 +55,31 @@ insertAtBeginning(node1, 5);
 //   }
 //   current.next = newNode;
 //   return head;
-  
+
 // }
 
-
-
-
-
 function insertAtEnd(head, data) {
-    let newNode = new Node(data);
-    
+  let newNode = new Node(data);
 
-    
-    let current = head;
-    // Stop at the last node (where next is null)
-    while (current.next !== null) {
-        current = current.next;
-    }
-    // here, current.next is the last node's next of head. now we get the last node's next to point to newNode
-    // the reason behind running this loop to get memmory address of last node is because we don't have direct access to it.
-    //when we have access to last node, we can change its next to point to newNode
-    // here current  = current.next does not depend on others because each node and its next are independent of each other.
-    current.next = newNode;
-    return head;
+  let current = head;
+  // Stop at the last node (where next is null)
+  while (current.next !== null) {
+    current = current.next;
+  }
+  // here, current.next is the last node's next of head. now we get the last node's next to point to newNode
+  // the reason behind running this loop to get memmory address of last node is because we don't have direct access to it.
+  //when we have access to last node, we can change its next to point to newNode
+  // here current  = current.next does not depend on others because each node and its next are independent of each other.
+  current.next = newNode;
+  return head;
 }
 
-insertAtEnd(node1, 777);
-insertAtEnd(node1, 569);
+// insertAtEnd(node1, 777);
+// insertAtEnd(node1, 569);
 //Insert a node after a given node
 
 function insertAfterNode(prevNode, data) {
-  if(prevNode === null){
+  if (prevNode === null) {
     console.log("The given previous node cannot be null");
     return;
   }
@@ -99,11 +88,8 @@ function insertAfterNode(prevNode, data) {
   newNode.next = nextNode;
   prevNode.next = newNode;
   return node1;
-    
-
 }
 // console.dir(insertAfterNode(node2, 902), {depth: null}); // Insert 99 after node with value 20
-
 
 // console.dir(node1, {depth: null}); // New head with value 5
 // console.dir( insertAtEnd(node1, 909),{depth: null});
@@ -112,43 +98,41 @@ function insertAfterNode(prevNode, data) {
 //simple task: Delete the first node
 
 function deleteFirstNode(head) {
-  if(head === null){
+  if (head === null) {
     return null;
   }
   node1 = head.next; // Update head to the next node
   return node1;
 }
 
-console.dir(deleteFirstNode(node1), {depth: null}); // New head with value 8
+// console.dir(deleteFirstNode(node1), {depth: null}); // New head with value 8
 
-//simple task: Delete the last node 
+//simple task: Delete the last node
 function deleteLastNode(head) {
-  if(head === null){
+  if (head === null) {
     return null;
   }
-  while(head.next !== null){
+  while (head.next !== null) {
     head = head.next;
-    if(head.next.next === null){
+    if (head.next.next === null) {
       head.next = null;
       break;
-
     }
   }
 
   return node1;
 }
 
-
 // console.dir(deleteLastNode(node1), {depth: null}); // List without last node
 
 //simple task : Delete a node with specific value
 function deleteNodeByValue(head, value) {
-  if(head === null){
+  if (head === null) {
     return null;
   }
   let current = head;
-  while(current.next !== null){
-    if(current.next.data === value){
+  while (current.next !== null) {
+    if (current.next.data === value) {
       current.next = current.next.next;
       break;
     }
@@ -158,11 +142,10 @@ function deleteNodeByValue(head, value) {
 }
 // console.dir(deleteNodeByValue(node1, 20), {depth: null}); // List without node with value 20
 
-
 //1.2 Start with Problem 1.2 (Search Element) and solve them in the recommended order. After each problem, test with:
 function searchElement(head, key) {
-  while(head !== null){
-    if(head.data === key){
+  while (head !== null) {
+    if (head.data === key) {
       return true;
     }
     head = head.next;
@@ -175,8 +158,8 @@ function searchElement(head, key) {
 // Problem 1.3 - Get Nth Node
 function getNthNode(head, index) {
   let count = 0;
-  while(head !== null){
-    if(count === index){
+  while (head !== null) {
+    if (count === index) {
       return head.data;
     }
     head = head.next;
@@ -185,24 +168,59 @@ function getNthNode(head, index) {
   return null;
 }
 
-console.log(getNthNode(node1, 2)); // 20
-console.log(getNthNode(node1, 5)); // null
+// console.log(getNthNode(node1, 2)); // 20
+// console.log(getNthNode(node1, 5)); // null
 
 //Problem 2.1: Insert at Position
 function insertAtPosition(head, data, position) {
+  let originalHead = head;
   let newNode = new Node(data);
   let count = 0;
-  while(head !== null){
-    if(count + 1 === position){
-      newNode.next = head.next
+  if (position === 0 && head !== null) {
+    newNode.next = head;
+    return newNode;
+  } else if (position === 0 && head === null) {
+    return newNode;
+  }
+  while (head !== null) {
+    if (count + 1 === position) {
+      newNode.next = head.next;
       head.next = newNode;
-      return node1;
+      return originalHead;
     }
-    head= head.next;
+
+    head = head.next;
     count++;
   }
+  if (position > count) {
+    return insertAtEnd(originalHead, data);
+  }
 }
-console.dir(insertAtPosition(node1, 555, 2), {depth: null}); // Insert 555 at position 2
+insertAtPosition(node1, 555, 2);
+insertAtPosition(node1, 585, 0);
+// console.dir(insertAtPosition(node1, 555, 2), { depth: null }); // Insert 555 at position 2
+// console.dir(insertAtPosition(node1, 585, 0), { depth: null }); // Insert 555 at position 0
+
+//Problem 2.2 - Insert in Sorted List
+function insertInSortedList(head, val) {
+  let newNode = new Node(val);
+  let count = 0;
+  let current = head;
+  let prev=null;
+  while (current !== null) {
+    if(current.next !== null && current.data < current.next.data){
+     prev = current;
+    }
+    
+    current = current.next;
+    
+    count++;
+  }
+ return prev;
+}
+console.dir(node1, { depth: null }); // Original list
+console.dir(insertInSortedList(node1, 25), { depth: null }); // Insert 25 in sorted list
+
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
