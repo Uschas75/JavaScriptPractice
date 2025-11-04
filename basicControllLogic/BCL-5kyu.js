@@ -74,8 +74,8 @@ function insertAtEnd(head, data) {
   return head;
 }
 
-// insertAtEnd(node1, 777);
-// insertAtEnd(node1, 569);
+insertAtEnd(node1, 777);
+insertAtEnd(node1, 569);
 //Insert a node after a given node
 
 function insertAfterNode(prevNode, data) {
@@ -203,23 +203,128 @@ insertAtPosition(node1, 585, 0);
 
 //Problem 2.2 - Insert in Sorted List
 function insertInSortedList(head, val) {
-  let newNode = new Node(val);
-  let count = 0;
-  let current = head;
-  let prev=null;
-  while (current !== null) {
-    if(current.next !== null && current.data < current.next.data){
-     prev = current;
-    }
-    
-    current = current.next;
-    
-    count++;
+
+  if(head === null){
+    return new Node(val);
   }
- return prev;
+
+  let arr = [];
+  while(head.next !== null){
+    arr.push(head.data);
+    head = head.next;
+  }
+  arr.push(val)
+  arr.sort((a, b) => a - b);
+  let inserted = new Node(arr[0]);
+  let dummyHead = inserted;
+  for(let i = 1; i <= arr.length -1; i++){
+    inserted.next = new Node(arr[i]);
+    inserted = inserted.next;
+  }
+  node1 = dummyHead;
+  return node1;
+
+}
+// console.dir(node1, { depth: null }); // Original list
+insertInSortedList(node1, 11)
+// console.dir(insertInSortedList(node1, 11), { depth: null }); // Insert 25 in sorted list
+// console.dir(insertInSortedList(null, 5), { depth: null }); // Insert into empty list
+// console.dir(insertInSortedList(node1, 10), { depth: null }); // Insert into single-node list
+
+
+// Problem 2.3 - Delete Node from Sorted List
+function deleteFromSortedList(head, val) {
+  if(head === null){
+    return null;
+  }
+  if(head.data === val){
+    return head.next;
+  }
+  let current = head;
+  while(current.next !== null){
+    if(current.next.data === val && current.next.next !== null){
+      current.next = current.next.next;
+      return head; 
+    } else if(current.next.data === val && current.next.next === null){
+      current.next = null;
+      return head;
+    }
+    current = current.next;
+  }
 }
 console.dir(node1, { depth: null }); // Original list
-console.dir(insertInSortedList(node1, 25), { depth: null }); // Insert 25 in sorted list
+// deleteFromSortedList(node1, 20);
+// console.dir(deleteFromSortedList(node1, 20), { depth: null }); // Delete 20 from sorted list
+// console.dir(deleteFromSortedList(null, 5), { depth: null }); // Delete from empty list
+
+//Problem 3.1 - Reverse Linked List
+
+function reverseLinkedList(head) {
+    let prev = null;
+    let current = head;
+    
+    while (current !== null) {
+        let next = current.next; // Store next node
+        // for the next two lines , we are isolating current node and storeing it as the later node's next value 
+        current.next = prev; // Reverse the link
+        prev = current; // Move prev to current
+        // make the current's value the rest of the list to continue the process
+        current = next; // Move to next node
+    }
+    
+    return prev;  // New head
+}
+// console.dir(reverseLinkedList(node1), { depth: null }); // Reversed list
+
+// Problem 3.2 - Find Middle Node
+function findMiddleNode(head) {
+  let count = 0;
+  let current = head;
+  while(current !== null){
+    count++;
+    current = current.next;
+  }
+  let middleIndex = Math.floor(count / 2);
+  current = head;
+  let index = 0;
+  while(current !== null){
+    if(index === middleIndex){
+      return current;
+    }
+    index++;
+    current = current.next;
+  }
+  return current;
+}
+console.dir(findMiddleNode(node1), { depth: null }); // Middle node
+let circleNode = new Node(999);
+function createCycle(head, circleNode) { 
+  let current = head;
+  while(current.next !== null){
+    current = current.next;
+  }
+  current.next = circleNode; // Creating a cycle for testing
+  circleNode.next = head; // Pointing back to second node to form a cycle
+  return circleNode;
+} 
+// console.dir(createCycle(node1, circleNode), { depth: null }); // List with cycle
+
+
+// Problem 3.3 - Detect Cycle in Linked List
+function detectCycle(head) {
+  let slow = head;
+  let fast = head;
+  while(fast !== null && slow !== null && fast.next !== null){
+    slow = slow.next;
+    fast = fast.next.next;
+    if(slow === fast){
+      return true;
+    }
+  }
+  return false;
+}
+console.log(detectCycle(node1)); // false
+
 
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
