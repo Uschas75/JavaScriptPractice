@@ -42,9 +42,9 @@ function insertAtBeginning(head, data) {
   node1 = newNode; // Update head to new node
   return newNode;
 }
-// insertAtBeginning(node1, 5);
-// insertAtBeginning(node1, 8);
-// insertAtBeginning(node1, 3);
+insertAtBeginning(node1, 5);
+insertAtBeginning(node1, 569);
+insertAtBeginning(node1, 30);
 
 // //Simple task: Insert at end
 // function insertAtEnd(head, data) {
@@ -90,7 +90,7 @@ function insertAfterNode(prevNode, data) {
   return node1;
 }
 // console.dir(insertAfterNode(node2, 902), {depth: null}); // Insert 99 after node with value 20
-
+insertAfterNode(node3, 777);
 // console.dir(node1, {depth: null}); // New head with value 5
 // console.dir( insertAtEnd(node1, 909),{depth: null});
 // traverse(node1); // Output: 5 -> 8 -> 3 -> 10 -> 20 -> 30 -> 99 -> null
@@ -203,56 +203,53 @@ insertAtPosition(node1, 585, 0);
 
 //Problem 2.2 - Insert in Sorted List
 function insertInSortedList(head, val) {
-
-  if(head === null){
+  if (head === null) {
     return new Node(val);
   }
 
   let arr = [];
-  while(head.next !== null){
+  while (head.next !== null) {
     arr.push(head.data);
     head = head.next;
   }
-  arr.push(val)
+  arr.push(val);
   arr.sort((a, b) => a - b);
   let inserted = new Node(arr[0]);
   let dummyHead = inserted;
-  for(let i = 1; i <= arr.length -1; i++){
+  for (let i = 1; i <= arr.length - 1; i++) {
     inserted.next = new Node(arr[i]);
     inserted = inserted.next;
   }
   node1 = dummyHead;
   return node1;
-
 }
 // console.dir(node1, { depth: null }); // Original list
-insertInSortedList(node1, 11)
+// insertInSortedList(node1, 11)
 // console.dir(insertInSortedList(node1, 11), { depth: null }); // Insert 25 in sorted list
 // console.dir(insertInSortedList(null, 5), { depth: null }); // Insert into empty list
 // console.dir(insertInSortedList(node1, 10), { depth: null }); // Insert into single-node list
 
-
 // Problem 2.3 - Delete Node from Sorted List
 function deleteFromSortedList(head, val) {
-  if(head === null){
+  if (head === null) {
     return null;
   }
-  if(head.data === val){
+  if (head.data === val) {
     return head.next;
   }
   let current = head;
-  while(current.next !== null){
-    if(current.next.data === val && current.next.next !== null){
+  while (current.next !== null) {
+    if (current.next.data === val && current.next.next !== null) {
       current.next = current.next.next;
-      return head; 
-    } else if(current.next.data === val && current.next.next === null){
+      return head;
+    } else if (current.next.data === val && current.next.next === null) {
       current.next = null;
       return head;
     }
     current = current.next;
   }
 }
-console.dir(node1, { depth: null }); // Original list
+// console.dir(node1, { depth: null }); // Original list
 // deleteFromSortedList(node1, 20);
 // console.dir(deleteFromSortedList(node1, 20), { depth: null }); // Delete 20 from sorted list
 // console.dir(deleteFromSortedList(null, 5), { depth: null }); // Delete from empty list
@@ -260,19 +257,19 @@ console.dir(node1, { depth: null }); // Original list
 //Problem 3.1 - Reverse Linked List
 
 function reverseLinkedList(head) {
-    let prev = null;
-    let current = head;
-    
-    while (current !== null) {
-        let next = current.next; // Store next node
-        // for the next two lines , we are isolating current node and storeing it as the later node's next value 
-        current.next = prev; // Reverse the link
-        prev = current; // Move prev to current
-        // make the current's value the rest of the list to continue the process
-        current = next; // Move to next node
-    }
-    
-    return prev;  // New head
+  let prev = null;
+  let current = head;
+
+  while (current !== null) {
+    let next = current.next; // Store next node
+    // for the next two lines , we are isolating current node and storeing it as the later node's next value
+    current.next = prev; // Reverse the link
+    prev = current; // Move prev to current
+    // make the current's value the rest of the list to continue the process
+    current = next; // Move to next node
+  }
+
+  return prev; // New head
 }
 // console.dir(reverseLinkedList(node1), { depth: null }); // Reversed list
 
@@ -280,15 +277,15 @@ function reverseLinkedList(head) {
 function findMiddleNode(head) {
   let count = 0;
   let current = head;
-  while(current !== null){
+  while (current !== null) {
     count++;
     current = current.next;
   }
   let middleIndex = Math.floor(count / 2);
   current = head;
   let index = 0;
-  while(current !== null){
-    if(index === middleIndex){
+  while (current !== null) {
+    if (index === middleIndex) {
       return current;
     }
     index++;
@@ -296,28 +293,27 @@ function findMiddleNode(head) {
   }
   return current;
 }
-console.dir(findMiddleNode(node1), { depth: null }); // Middle node
+// console.dir(findMiddleNode(node1), { depth: null }); // Middle node
 let circleNode = new Node(999);
-function createCycle(head, circleNode) { 
+function createCycle(head, circleNode) {
   let current = head;
-  while(current.next !== null){
+  while (current.next !== null) {
     current = current.next;
   }
   current.next = circleNode; // Creating a cycle for testing
   circleNode.next = head; // Pointing back to second node to form a cycle
   return circleNode;
-} 
+}
 // console.dir(createCycle(node1, circleNode), { depth: null }); // List with cycle
-
 
 // Problem 3.3 - Detect Cycle in Linked List
 function detectCycle(head) {
   let slow = head;
   let fast = head;
-  while(fast !== null && slow !== null && fast.next !== null){
+  while (fast !== null && slow !== null && fast.next !== null) {
     slow = slow.next;
     fast = fast.next.next;
-    if(slow === fast){
+    if (slow === fast) {
       return true;
     }
   }
@@ -325,7 +321,32 @@ function detectCycle(head) {
 }
 console.log(detectCycle(node1)); // false
 
+//Problem 3.4 - Remove Duplicates from Sorted Linked List
 
+function removeDuplicates(head) {
+  let current = head;
+  let dummy = null;
+  while (current !== null) {
+    dummy = current;
+    while (dummy !== null && dummy.next !== null) {
+      if (current.data === dummy.next.data) {
+        dummy.next = dummy.next.next; // Remove & STAY
+      } else {
+        dummy = dummy.next; // Move forward
+      }
+    }
+    console.log(dummy);
+
+    current = current.next;
+  }
+  return head;
+}
+
+
+
+
+console.dir(node1, { depth: null });
+console.dir(removeDuplicates(node1), { depth: null }); // List without duplicates
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
