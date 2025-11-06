@@ -345,8 +345,22 @@ function removeDuplicates(head) {
 
 
 
+
 console.dir(node1, { depth: null });
 console.dir(removeDuplicates(node1), { depth: null }); // List without duplicates
+
+
+
+//Problem 3.5: Find Intersection Point of Two Linked Lists
+
+function findIntersection(headA, headB) {
+  let nodesSet = new Set();
+  let currentA = headA;
+  let currentB = headB;
+
+  while ( currentA !== null &&)
+
+}
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
