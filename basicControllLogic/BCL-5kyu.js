@@ -319,7 +319,7 @@ function detectCycle(head) {
   }
   return false;
 }
-console.log(detectCycle(node1)); // false
+// console.log(detectCycle(node1)); // false
 
 //Problem 3.4 - Remove Duplicates from Sorted Linked List
 
@@ -346,21 +346,39 @@ function removeDuplicates(head) {
 
 
 
-console.dir(node1, { depth: null });
-console.dir(removeDuplicates(node1), { depth: null }); // List without duplicates
+// console.dir(node1, { depth: null });
+// console.dir(removeDuplicates(node1), { depth: null }); // List without duplicates
 
 
 
 //Problem 3.5: Find Intersection Point of Two Linked Lists
 
 function findIntersection(headA, headB) {
-  let nodesSet = new Set();
-  let currentA = headA;
-  let currentB = headB;
-
-  while ( currentA !== null &&)
-
+ let pointerA = headA;
+  let pointerB = headB;
+  while(pointerA !== pointerB){
+    pointerA = pointerA ? pointerA.next : headB;
+    pointerB = pointerB ? pointerB.next : headA;
+  }
+  return pointerA; // or pointerB, they are equal here
 }
+
+let circleNode2 = new Node(999);
+let nodeA1 = new Node(20);
+let nodeA2 = new Node(30);
+let nodeA3 = new Node(777);
+let nodeA4 = new Node(777);
+let nodeA5 = new Node(569);
+
+nodeA1.next = nodeA2;
+nodeA2.next = nodeA3;
+nodeA3.next = nodeA4
+nodeA4.next = nodeA5;
+
+
+
+console.dir(node1, { depth: null });
+console.log(findIntersection(node1, nodeA1)); // false
 // console.log(type(new (function Custom() {})())); // 'Custom'
 /******
  * 
@@ -373,6 +391,7 @@ For example in the following picture the size of the dangling piece is 3 and the
 // Use the `getNext' method or 'next' property to get the following node.
 node.getNext()
 node.next
+
 Notes:
 
 do NOT mutate the nodes!
