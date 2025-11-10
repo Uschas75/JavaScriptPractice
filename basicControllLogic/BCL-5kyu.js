@@ -366,7 +366,7 @@ function findIntersection(headA, headB) {
 let circleNode2 = new Node(999);
 let nodeA1 = new Node(20);
 let nodeA2 = new Node(30);
-let nodeA3 = new Node(777);
+let nodeA3 = new Node(6354874);
 let nodeA4 = new Node(777);
 let nodeA5 = new Node(569);
 
@@ -375,243 +375,63 @@ nodeA2.next = nodeA3;
 nodeA3.next = nodeA4
 nodeA4.next = nodeA5;
 
+let nodeB1 = new Node(100);
+let nodeB2 = new Node(200);
+let nodeB3 = new Node(300);
+nodeB1.next = nodeB2;
+nodeB2.next = nodeB3;
+nodeB3.next = nodeA3; // Creating intersection at nodeA3
 
 
-console.dir(node1, { depth: null });
-console.log(findIntersection(node1, nodeA1)); // false
+
+
+// console.dir(node1, { depth: null });
+// console.log(findIntersection(nodeB1, nodeA1)); // false
 // console.log(type(new (function Custom() {})())); // 'Custom'
-/******
+
+
+//------------------------Fresh End------------------------//
+/**
  * 
- task: 39
- You are given a node that is the beginning of a linked list. This list contains a dangling piece and a loop. Your objective is to determine the length of the loop.
+ task 39:  You are given a node that is the beginning of a linked list.
+  This list contains a dangling piece and a loop. Your objective is to determine the length of the loop.
 
 For example in the following picture the size of the dangling piece is 3 and the loop size is 12:
-
-
-// Use the `getNext' method or 'next' property to get the following node.
-node.getNext()
-node.next
-
-Notes:
-
-do NOT mutate the nodes!
-in some cases there may be only a loop, with no dangling piece
-Thanks to shadchnev, I broke all of the methods from the Hash class.
-
-Don't miss dmitry's article in the discussion after you pass the Kata !! 
-// Codewars expects a function named `loop_size`
  */
 
+function loop_size(node) {
+ 
+  let fast = node;
+  let slow = node;
+  
+ 
+  
+  while(fast && fast.next){
+    slow = slow.next;
+    fast = fast.next.next;
+     if(slow === fast){
+       
+       let current = slow;
+        let count = 1;
+       while(current.next !== slow){
+         current = current.next;
+         count++;
+       }
+       return count;
+     }
+  }
+  return null;
+}
+
 /**
- * task: 39- step 1
- * tep 1: Understand the Node
+ * task 40 : We have 3 equations with 3 unknowns x, y, and z and we are to solve for these unknowns.
 
-Concept: A linked list is made of nodes, where each node stores data and a reference (pointer) to the next node.
+Equations 4x -3y +z = -10, 2x +y +3z = 0, and -x +2y -5z = 17 will be passed in as an array of [[4, -3, 1, -10], [2, 1, 3, 0], [-1, 2, -5, 17]] and the result should be returned as an array like [1, 4, -2] (i.e. [x, y, z]).
 
-Exercise 1:
-Define a class Node with two attributes: data and next.
-Create a node with some data and print its values.
-Question: Create a node with the value 10. What is its next value?
- * 
+Note: In C++ do not use new or malloc to allocate memory for the returned variable as allocated memory will not be freed in the Test Cases. Setting the variable as static will do.
  */
 
-/**
- * task: 39- step 2
-Step 2: Create a Simple Linked List
-Concept: A linked list starts with a head that points to the first node.
-Exercise 2:
-Define a class LinkedList with an attribute head.
-Add a method print_list() to print all node values.
-Question: Create a linked list and add three nodes with values 10, 20, 30. Print the list.
+function solveEq(eq){
 
-
- * 
- */
-// Define Node class first
-/**
- * 
- * 
- * 
- * 
- * 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Define Node class first
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
 }
-
-// Define LinkedList class
-class TestLinkedList {
-  constructor() {
-    this.head = null; // Points to the first node
-  }
-  
-  // Insert node at the beginning
-  insertAtBeginning(data) {
-    let newNode = new Node(data);
-    newNode.next = this.head;
-    this.head = newNode;
-  }
-
-  // Insert node at the end (this is what you wanted to do)
-  insertAtEnd(data) {
-    let newNode = new Node(data);
-
-    let current = this.head;
-    
-    if (!this.head) {
-      this.head = newNode;
-      return;
-    }
-    while (current.next) {
-      current = current.next;
-    }
-    
-    current.next = newNode;
-    return this.head;
-  }
-}
-
-// // ✅ Test the class
-// let testLinkedList_A = new TestLinkedList();
-
-// console.log("Insert at beginning:");
-// testLinkedList_A.insertAtBeginning(85);
-
-// console.log("Insert 90 at end:");
-// testLinkedList_A.insertAtEnd(90);
-
-// console.log("Insert 770 at end:");
-// testLinkedList_A.insertAtEnd(770);
-// testLinkedList_A.insertAtEnd(870);
-// testLinkedList_A.insertAtEnd(98570);
-
-// // console.log("Print linked list:");
-// // testLinkedList_A.printList();
-// // console.log(testLinkedList_A.head);
-
-// // console.dir(testLinkedList_A, { depth: null });
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-  }
-  atTheBegining(data) {
-    let newNode = new Node(data);
-    newNode.next = this.head;
-
-    this.head = newNode; // the head always changes to the new node and the previous data  which was the head at
-    // certain point of times becomes the next of the new node
-  }
-  atTheLast(data) {
-    const newNode = new Node(data);
-    // console.log(`--- Adding ${data} ---`);
-    
-    if (!this.head) {
-      this.head = newNode;
-      console.log("List was empty, set as head");
-      return;
-    }
-    
-    let current = this.head;
-    console.log(`Starting at head: ${current.data}`);
-    
-    // let steps = 0;
-    // while (current.next) {
-      //   current = current.next;
-      //   steps++;
-      //   console.log(`Step ${steps}: Moved to node with data: ${current.data}`);
-      // }
-      
-      // console.log(`Reached end at node: ${current.data}`);
-      current.next = newNode;
-      // console.log(`Added ${data} after ${current.data}`);
-    }
-    
-  /**
-   * Given the head of a singly linked list, return the middle node. If there are two middle nodes, return the second middle node.
-  
-  
-  middleNode() {
-   {
-    let nodeCount = 0;
-      let current = this.head;
-      while (current) {
-        nodeCount++;
-        current = current.next;
-      }
-      current = this.head;
-      let middleNode = nodeCount / 2;
-      let count = 1;
-      
-      while (current && count < middleNode) {
-        count++;
-        current = current.next;
-      }
-      
-      if (nodeCount % 2 !== 0) {
-        console.log(nodeCount, middleNode);
-        return current.data;
-      } else {
-        console.log(nodeCount, middleNode);
-      return [current.next.data, current.data];
-      }
-    }
-  }
-  //Given the head of a linked list and an integer val,
-  //  remove all nodes that contain val and return the new head.
-  removeElements(val) {
-    // console.log( this.head);
-    let dummy = new Node(0);
-    let current = this.head;
-    while(current){
-      if(current.data !== val){
-       newNode = new Node(current.data);
-
-      }
-      current = current.next;
-    }
-    // dummy.next = this.head;
-    return dummy
-  }
-  
-}
-let ll = new LinkedList();
-// ll.atTheBegining(10);
-// ll.atTheBegining(20);
-// ll.atTheBegining(30);
-// console.dir(ll.head, { depth: null });
-ll.atTheLast(40);
-ll.atTheLast(50);
-ll.atTheLast(60);
-ll.atTheLast(70);
-// ll.atTheLast(80);
-// ll.atTheLast(90);
-// ll.atTheLast(100);
-// console.dir(ll, { depth: null }); // 30 -> 20 -> 10 -> null
-// console.log("Middle Node Data:", ll.middleNode()); // Should print 50
-// console.log("Removing elements with value 70:");
-// ll.removeElements(30);
-// console.dir(ll.removeElements(40),  { depth: null });  // remove head
-console.dir(ll, { depth: null });
-
-// console.dir(ll.removeElements, { depth: null });
-
-
-*/
+solveEq([[4, -3, 1, -10], [2, 1, 3, 0], [-1, 2, -5, 17]]); // [1, 4, -2]
