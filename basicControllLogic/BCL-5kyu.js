@@ -432,46 +432,12 @@ Note: In C++ do not use new or malloc to allocate memory for the returned variab
  */
 
 function solveEq(eq){
-  
-    // Make a copy of the matrix to avoid modifying the input
-    const matrix = eq.map(row => [...row]);
-    const n = matrix.length;
-    
-    // Gaussian elimination
-    for (let i = 0; i < n; i++) {
-        // Find pivot row
-        let maxRow = i;
-        for (let j = i + 1; j < n; j++) {
-            if (Math.abs(matrix[j][i]) > Math.abs(matrix[maxRow][i])) {
-                maxRow = j;
-            }
-        }
-        
-        // Swap rows if needed
-        if (maxRow !== i) {
-            [matrix[i], matrix[maxRow]] = [matrix[maxRow], matrix[i]];
-        }
-        
-        // Eliminate below
-        for (let j = i + 1; j < n; j++) {
-            const factor = matrix[j][i] / matrix[i][i];
-            for (let k = i; k <= n; k++) {
-                matrix[j][k] -= factor * matrix[i][k];
-            }
-        }
-    }
-    
-    // Back substitution
-    const solution = new Array(n);
-    for (let i = n - 1; i >= 0; i--) {
-        let sum = 0;
-        for (let j = i + 1; j < n; j++) {
-            sum += matrix[i][j] * solution[j];
-        }
-        solution[i] = (matrix[i][n] - sum) / matrix[i][i];
-    }
-    
-    return solution;
-
+  let matD = eq.map(function(item){
+    return item.slice(0,-1);
+  })
+  console.log(matD);
+  let det = (matD[0][0]*((matD[1][1]*matD[2][2])-(matD[1][2]*matD[2][1])));
+  console.log(det);
+ 
 }
 solveEq([[4, -3, 1, -10], [2, 1, 3, 0], [-1, 2, -5, 17]]); // [1, 4, -2]
