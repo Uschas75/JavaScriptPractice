@@ -435,9 +435,40 @@ function solveEq(eq){
   let matD = eq.map(function(item){
     return item.slice(0,-1);
   })
-  console.log(matD);
-  let det = (matD[0][0]*((matD[1][1]*matD[2][2])-(matD[1][2]*matD[2][1])));
-  console.log(det);
+
+
+  let val = [];
+  let storeVal = 0
+  let p = 0;
+  for(let i = 0; i < matD.length;i++){
+    val[p] = [];
+    for(let j = 0, m = 0; j < matD[i].length; j++){
+      if(i !== storeVal && j !== storeVal){
+       val[p][m] = matD[i][j];
+       m++;
+       if(m === 2){
+        p++;
+       }
+      }
+    }
+  }
+
+  let mulA = 1;
+  let mulB = 1;
+  for(let i = 0 ; i < val.length;i++){   
+    for(let j = 0; j< val[i].length;j++){
+      if(i === j){
+        mulA = mulA*val[i][j]
+      }
+      else{
+        mulB = mulB*val[i][j]
+      }
+      
+    }
+  }
+ console.log(val);
+ console.log(mulA-mulB);
+  return val;
  
 }
 solveEq([[4, -3, 1, -10], [2, 1, 3, 0], [-1, 2, -5, 17]]); // [1, 4, -2]
