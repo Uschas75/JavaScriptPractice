@@ -342,21 +342,15 @@ function removeDuplicates(head) {
   return head;
 }
 
-
-
-
-
 // console.dir(node1, { depth: null });
 // console.dir(removeDuplicates(node1), { depth: null }); // List without duplicates
-
-
 
 //Problem 3.5: Find Intersection Point of Two Linked Lists
 
 function findIntersection(headA, headB) {
- let pointerA = headA;
+  let pointerA = headA;
   let pointerB = headB;
-  while(pointerA !== pointerB){
+  while (pointerA !== pointerB) {
     pointerA = pointerA ? pointerA.next : headB;
     pointerB = pointerB ? pointerB.next : headA;
   }
@@ -372,7 +366,7 @@ let nodeA5 = new Node(569);
 
 nodeA1.next = nodeA2;
 nodeA2.next = nodeA3;
-nodeA3.next = nodeA4
+nodeA3.next = nodeA4;
 nodeA4.next = nodeA5;
 
 let nodeB1 = new Node(100);
@@ -382,13 +376,9 @@ nodeB1.next = nodeB2;
 nodeB2.next = nodeB3;
 nodeB3.next = nodeA3; // Creating intersection at nodeA3
 
-
-
-
 // console.dir(node1, { depth: null });
 // console.log(findIntersection(nodeB1, nodeA1)); // false
 // console.log(type(new (function Custom() {})())); // 'Custom'
-
 
 //------------------------Fresh End------------------------//
 /**
@@ -400,25 +390,21 @@ For example in the following picture the size of the dangling piece is 3 and the
  */
 
 function loop_size(node) {
- 
   let fast = node;
   let slow = node;
-  
- 
-  
-  while(fast && fast.next){
+
+  while (fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
-     if(slow === fast){
-       
-       let current = slow;
-        let count = 1;
-       while(current.next !== slow){
-         current = current.next;
-         count++;
-       }
-       return count;
-     }
+    if (slow === fast) {
+      let current = slow;
+      let count = 1;
+      while (current.next !== slow) {
+        current = current.next;
+        count++;
+      }
+      return count;
+    }
   }
   return null;
 }
@@ -431,44 +417,86 @@ Equations 4x -3y +z = -10, 2x +y +3z = 0, and -x +2y -5z = 17 will be passed in 
 Note: In C++ do not use new or malloc to allocate memory for the returned variable as allocated memory will not be freed in the Test Cases. Setting the variable as static will do.
  */
 
-function solveEq(eq){
-  let matD = eq.map(function(item){
-    return item.slice(0,-1);
-  })
+function solveEq(eq) {
+  let matD = eq.map(function (item) {
+    return item.slice(0, -1);
+  });
 
+  let equalVal = eq.map(function (item) {
+    return item.slice(-1);
+  });
 
-  let val = [];
-  let storeVal = 0
-  let p = 0;
-  for(let i = 0; i < matD.length;i++){
-    val[p] = [];
-    for(let j = 0, m = 0; j < matD[i].length; j++){
-      if(i !== storeVal && j !== storeVal){
-       val[p][m] = matD[i][j];
-       m++;
-       if(m === 2){
-        p++;
-       }
+  // CORRECTED: Replace specific columns with constants
+  let matDx = matD.map((row, i) => [equalVal[i][0], row[1], row[2]]);
+  let matDy = matD.map((row, i) => [row[0], equalVal[i][0], row[2]]);
+  let matDz = matD.map((row, i) => [row[0], row[1], equalVal[i][0]]);
+
+  // console.log(matDx);
+  // console.log(matDy);
+  // console.log(matDz);
+  function findingDeterminant(equation) {
+    let det = 0;
+    let val;
+    for (let k = 0; k < equation.length; k++) {
+      // console.log("hello");
+      val = [];
+      let p = 0;
+      // finding  determinant
+
+      for (let i = 0; i < equation.length; i++) {
+        val[p] = [];
+        for (let j = 0, m = 0; j < equation[i].length; j++) {
+          if (i !== 0 && j !== k) {
+            val[p][m] = equation[i][j];
+            m++;
+            if (m === 2) {
+              p++;
+            }
+          }
+        }
+      }
+
+      // cross multiplication
+      let mulA = 1;
+      let mulB = 1;
+      for (let i = 0; i < val.length; i++) {
+        for (let j = 0; j < val[i].length; j++) {
+          if (i === j) {
+            mulA = mulA * val[i][j];
+          } else {
+            mulB = mulB * val[i][j];
+          }
+        }
+      }
+
+      if ((k + 1) % 2 !== 0) {
+        det = det + equation[0][k] * (mulA - mulB);
+        // console.log(det);
+      } else if ((k + 1) % 2 === 0) {
+        det = det - equation[0][k] * (mulA - mulB);
+        // console.log(det);
       }
     }
+    return det;
   }
 
-  let mulA = 1;
-  let mulB = 1;
-  for(let i = 0 ; i < val.length;i++){   
-    for(let j = 0; j< val[i].length;j++){
-      if(i === j){
-        mulA = mulA*val[i][j]
-      }
-      else{
-        mulB = mulB*val[i][j]
-      }
-      
-    }
-  }
- console.log(val);
- console.log(mulA-mulB);
-  return val;
- 
+  const D = findingDeterminant(matD);
+  const x = findingDeterminant(matDx);
+  const y = findingDeterminant(matDy);
+  const z = findingDeterminant(matDz);
+
+  const result = [Math.round(x / D), Math.round(y / D), Math.round(z / D)];
+
+  return result;
+
+  // // findingDeterminant(matDx);
+  // findingDeterminant(matDy);
+  // findingDeterminant(matDz);
 }
-solveEq([[4, -3, 1, -10], [2, 1, 3, 0], [-1, 2, -5, 17]]); // [1, 4, -2]
+console.log(
+  solveEq([
+    [4, -3, 1, -10],
+    [2, 1, 3, 0],
+    [-1, 2, -5, 17],
+  ])
+); // [1, 4, -2]);
