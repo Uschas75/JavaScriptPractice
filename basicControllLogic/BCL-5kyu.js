@@ -500,3 +500,49 @@ console.log(
     [-1, 2, -5, 17],
   ])
 ); // [1, 4, -2]);
+
+
+/**
+ * task 41: When you're learning JavaScript, it can be easy to forget to "call" a function,
+ *  to add those two little brackets () to the end of the function name, and the value of the
+ *  function is coerced. The problem is, no error is thrown.
+
+Now, there are cases when you'd want to use this functionality. But for this kata, 
+let's assume any time a function is coerced, it means something unintended happen. 
+Your job is to throw an error whenever such a coersion would occur.
+
+function fn() { }
+var a = fn;
+
+a === fn; // true
+fn < 1; // error
++fn; // error
+
+*/
+
+
+function calculate() {
+    return 10 + 20;
+}
+
+// Function REFERENCE (no parentheses):
+let funcRef = calculate;        // Just the function object
+console.log(funcRef.prototype);           // [Function: calculate]
+
+// Function CALL (with parentheses):
+let result = calculate();       // Executes the function
+console.log(result.prototype);   
+let obj = { 
+    value: 100,
+    readOnly: "cannot change"
+};
+
+// Get property descriptor:
+let descriptor = Object.getOwnPropertyDescriptor(obj, 'value');
+console.log(descriptor);
+// {
+//   value: 100,
+//   writable: true,        // Can be changed
+//   enumerable: true,      // Shows up in for...in loops
+//   configurable: true     // Can be deleted or reconfigured
+// }
