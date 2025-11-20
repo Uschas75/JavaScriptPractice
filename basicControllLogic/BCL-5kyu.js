@@ -534,7 +534,10 @@ let result = calculate();       // Executes the function
 console.log(result.prototype);   
 let obj = { 
     value: 100,
-    readOnly: "cannot change"
+    readOnly: "cannot change",
+    ead: function() {
+        return this.value;
+    }
 };
 
 // Get property descriptor:
